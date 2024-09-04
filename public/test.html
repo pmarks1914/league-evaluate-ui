@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title> Simple Checkout</title>
+    <script src="http://127.0.0.1:3002/api/cdn/collegeleague.js" ></script>
+
+  </head>
+ <body class="container">
+  <button onclick="payWP()" class="wp-dash-btn" >Pay Now 1</button>
+
+    <script type ="text/javascript">
+      function payWP() {
+        // console.log("fff", typeAction)
+        wpPay (JSON.stringify({
+          "apikey": "V0fCVHLI.5lK7rrydqDtG3lOxSEiqC90rvtvdNskkPPPPP",
+          "currency": "GHS",
+          "note": "typeAction",
+          "amount": "0.1",
+          "full_name": "",
+          "phone": "",
+          "email": "",
+          "country": "GH",
+          "vendorId": "",
+          "transaction_ref": "",
+          "callbackurl": "collegeleague.com",
+          "redirect_url": "",
+          "setAmountByCustomer": false
+        }))
+      }
+    
+    </script>
+
+  </body>
+</html>
