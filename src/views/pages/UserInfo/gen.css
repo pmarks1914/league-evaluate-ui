@@ -1,0 +1,101 @@
+.h-flow{
+    height: 29em;
+    overflow-y: auto;
+    /* white-space: nowrap; */
+}
+.h-flow-table{
+    height: 27em;
+    overflow-y: auto;
+    white-space: nowrap;
+    
+}
+.table-responsive{
+    overflow-x: revert;
+}
+table th {
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 0;
+    z-index: auto; 
+    color: #fff;
+    background: #03960b;
+} 
+  .tscroll table td:first-child {
+    position: sticky;
+    left: 0;
+    color: #fff;
+    background: #03960b;
+  }
+.v-flow{
+    width: 100%;
+    height: 120px;
+    /* overflow-x: scroll; */
+    overflow-y: hidden;
+    white-space: nowrap;
+    display: flex;
+}
+.nav {
+    flex-wrap: inherit !important;
+}
+.nav-tabs .nav-link {
+    color: #080808;
+}
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #10802c !important;
+}
+.input-data, .input-data-i-m-1{
+    width: 100px;
+}
+.details-st{
+    width: 300px !important;    
+}
+.details-percent{
+    display: flex!important;
+}
+.details-st, .input-data, .input-data-i-m-1{  
+    border-left: 1px solid #03960b;
+    border-top: 0px;
+    border-bottom: 1px solid #03960b;
+    height: 30px;
+}
+/* .details-st a:hover{
+    width: 300px !important;    
+    border-left: 1px solid red;
+    border-top: 0px;
+    border-bottom: 1px solid red;
+}
+.details-st a:active, .details-st a:focus {
+    color: #080808;
+  } */
+  .date-00{
+    width: 100%;
+}
+.date-01{
+    width: 100%;
+    display: flex;
+}
+.btn-print{
+    /* position: relative;
+    Top: -38px;
+    Left: 320px; */
+    float: right;
+    margin: -33px 0px 0px -110px;
+    background-color: #e20f0f;
+}
+    @media print
+    {   
+        @page {
+            margin-top: 0;
+            /* margin-bottom: 0; */
+            size: auto;
+            margin: 0;  
+            top: 0px;
+        }
+        /* body {
+            padding-top: 72px;
+            padding-bottom: 72px ;
+        } */
+    }
+#tab-type1, #tab-type2, #tab-type3, #tab-type4, #tab-type5, #tab-type6, #tab-type7, #tab-type8, #tab-type9, #tab-type10, #tab-type11, #tab-type12, #tab-type13, #tab-type14, #tab-type15, #tab-type16, #tab-type17, #tab-type18, #tab-type19, #tab-type20, #tab-type21, #tab-type22, #tab-type23, #tab-type24, #tab-type25, #tab-type26, #tab-type27, #tab-type28, #tab-type29, #tab-type30, #tab-type31, #tab-type32, #tab-type33{
+    /* display: block; */
+}

@@ -1,0 +1,9 @@
+
+.v-flow{
+    height: 10em;
+    overflow-y: auto;
+    white-space: nowrap;
+}
+.perm{
+    font-size: "0.01rem !important"
+}

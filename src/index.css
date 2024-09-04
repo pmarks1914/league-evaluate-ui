@@ -1,13 +1,74 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body, .dash-info-des-0{
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Ubuntu, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: rgba(0,0,0,.87);
+
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.f-w-label{
+    font-weight: 500 !important;
 }
+.f-w-label-checkbox{
+    font-weight: 10 !important;
+    font-size: 10rem !important;
+}
+.bg-text-com-wp{
+    background-color: #1152bd;
+    color: #fff;
+}
+
+.body, .header, .footer, .bg-light{
+    background-color: #f8f8f8 !important;
+}
+.sidebar{
+    /* background-color: #0a4098 !important;
+    color: #080808 !important; */
+}
+.header{
+    border-bottom: var(--cui-header-border-width, 1px) solid var(--cui-header-border-color, #1152bd);
+}
+
+.login-input:focus {
+    border-color: white !important;
+    box-shadow: none !important;
+}
+.profile-img, .profile-img:hover, .profile-img:focus{
+    background-color: #fafafa;
+    box-shadow: none !important;
+    border: solid 1px #fff;
+}
+
+.my-actions { margin: 0 2em; }
+.order-1 { order: 1; }
+.order-2 { order: 2; }
+.order-3 { order: 3; }
+
+.right-gap {
+  margin-right: auto;
+}
+
+.custom-pagination {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+  }  
+  .custom-pagination-link {
+    color: #191919;
+    transition: all 0.3s ease;
+  }
+  .custom-pagination-link:hover {
+    color: #000;
+    background-color: #e9ecef;
+    border-radius: 5px;
+  }
+  .custom-pagination .page-item.active .page-link {
+    background-color: #000;
+    color: white;
+    border: 1px solid #000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  .wp-cursor-pointer{
+    cursor: pointer;
+  }

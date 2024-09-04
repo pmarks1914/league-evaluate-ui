@@ -1,0 +1,30 @@
+.trade-name span{
+    vertical-align: text-bottom;
+    align-items: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    display: inline-block;
+    font-weight: 700;
+    color: #1677ff;
+    background-image: -webkit-gradient(linear, 37.219838% 34.532506%, 36.425669% 93.178216%, from(#29cdff), to(#0a60ff), color-stop(0.37, #148eff));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+.cl-container{
+    border: 0.9px solid #f8f8f8;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.08) !important;
+}
+
+.mui-control-form form div div{
+    height: 32px;
+    /* padding: 0px 0px 0px 0px; */
+    margin-top: 0px;
+    font-size: small;
+}
+.cl-text-size{
+    size: 6em;
+}
+.cl-text-warn-color{
+    color: #950707;
+}
