@@ -28,8 +28,6 @@ const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Login = React.lazy(() => import('./views/pages/login/Login'))
 const JoinTeam = React.lazy(() => import('./views/pages/JoinTeam/JoinTeam'))
 const TeamLogin = React.lazy(() => import('./views/pages/JoinTeam/TeamLogin'))
-const Signin = React.lazy(() => import('./views/pages/login/signin'))
-const Signup = React.lazy(() => import('./views/pages/register/signup'))
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 const ChangePassword = React.lazy(() => import('./views/pages/AccountSetup/ChangePassword'))
@@ -46,9 +44,7 @@ class App extends Component {
             <Route exact path="/" name="Login Page" element={<Login />} />
             <Route exact path="/login" name="Login Page" element={<Login />} />
             <Route exact path="/team-login" name="Team Login Page" element={<TeamLogin />} />
-            <Route exact path="/signin" name="Signin Page" element={<Signin />} />
             {/* <Route exact path="/register" name="Register Page" element={<Register />} /> */}
-            <Route exact path="/signup" name="SignUp Page" element={<Signup />} />
             <Route exact path="/404" name="Page 404" element={<Page404 />} />
             <Route exact path="/500" name="Page 500" element={<Page500 />} />
             <Route exact path="/change-password" name="Change Password" element={<ChangePassword />} />

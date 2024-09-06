@@ -400,94 +400,24 @@ function evaluationApply(description) {
       {/* <WidgetsBrand withCharts /> */}
 
       <ToastContainer />
-      {/* {
-        userData?.type === 'Student' ?
-        <CRow className='m-3' >
-          <CCol sm="12" md="12" lg="12" xl="12">
-            <a href='/apply' className='justify-content-between align-items-center text-white bg-dark rounded-1 p-2' > Quick link to apply </a>
-          </CCol>
-        </CRow>
-        : ""
-      } */}
 
-      {
-        userData?.type === 'Student' ?
-          <CRow className='m-3' >
-            <CCol sm="12" md="12" lg="12" xl="12">
-              <a href='#' className='justify-content-between align-items-center text-white bg-dark rounded-1 p-2' onClick={()=> requestEvaluation() } > Request evaluation </a>
-            </CCol>
-          </CRow>
-          : ""
-      }
-      <br />
-
-      {/* stats */}
-      {/* <CRow className='m-3'> */}
-        {/* <CCol xs={12} sm={6} lg={3}>
-      {/* <CRow className='m-3'>
-        <CCol xs={12} sm={6} lg={3}>
-          <CWidgetStatsB
-            className="mb-4"
-            progress={{ color: 'success', value: 100 }}
-            text="All school"
-            title="School"
-            value={schDetails?.count_stats?.school || userData?.user?.count_stats?.school || "0"}
-          />
-        </CCol>
-        <CCol xs={12} sm={6} lg={3}>
-          <CWidgetStatsB
-            className="mb-4"
-            progress={{ color: 'danger', value: 100 }}
-            text="All programme"
-            title="Programmes"
-            value={schDetails?.count_stats?.programme || "0"}
-          />
-        </CCol> 
-        <CCol xs={12} sm={6} lg={3}>
-          <CWidgetStatsB
-            className="mb-4"
-            progress={{ color: 'warning', value: 100 }}
-            text="My application"
-            title="Application"
-            value={schDetails?.count_stats?.application || "0"}
-          />
-        </CCol>
-        <CCol xs={12} sm={6} lg={3}>
-          <CWidgetStatsB
-            className="mb-4"
-            progress={{ color: 'info', value: 100 }}
-            text="My files uploaded"
-            title="File"
-            value={schDetails?.count_stats?.file || "0"}
-          />
-        </CCol>*/}
-      {/* </CRow> */}
 
       <CRow className='m-3'>
         <CCol xs={12} sm={6} lg={3}>
           <CWidgetStatsB
             className="mb-4"
-            progress={{ color: 'success', value: 100 }}
-            text="Profile information"
-            title="Profile"
-            value={ ((evaDetails?.count_stats?.profile)?.toString() || "0") + "%" }
+            progress={{ color: 'warning', value: 100 }}
+            text="Evaluation request"
+            title="Evaluation"
+            value={evaDetails?.count_stats?.evaluation || "0"}
           />
         </CCol>
-        {/* <CCol xs={12} sm={6} lg={3}>
-          <CWidgetStatsB
-            className="mb-4"
-            progress={{ color: 'danger', value: 100 }}
-            text="Profile Docs Completed"
-            title="Documents"
-            value={"0%"}
-          />
-        </CCol> */}
         <CCol xs={12} sm={6} lg={3}>
           <CWidgetStatsB
             className="mb-4"
-            progress={{ color: 'warning', value: 100 }}
-            text="My evaluation request"
-            title="Application"
+            progress={{ color: 'success', value: 100 }}
+            text="Rejected Evaluation Request"
+            title="Rejected Count"
             value={evaDetails?.count_stats?.evaluation || "0"}
           />
         </CCol>
@@ -495,8 +425,8 @@ function evaluationApply(description) {
           <CWidgetStatsB
             className="mb-4"
             progress={{ color: 'info', value: 100 }}
-            text="My files uploaded"
-            title="File"
+            text="Completed Evaluation Request"
+            title="Completed Count"
             value={evaDetails?.count_stats?.file || "0"}
           />
         </CCol>
@@ -511,9 +441,8 @@ function evaluationApply(description) {
             <CCol xs={12} sm={9} lg={9} >
 
               <CCard className="mb-4">
-                <CCardHeader> Application Overview </CCardHeader>
+                <CCardHeader> Evaluation Overview </CCardHeader>
                 <CCardBody>
-
                   <CTable align="middle" className="mb-0 border" hover responsive>
                     <CTableHead color="light">
                       <CTableRow>
@@ -569,148 +498,6 @@ function evaluationApply(description) {
               </CCard>
             </CCol>
 
-          </CRow>
-          : ""
-      }
-
-      {
-        userData?.type === 'Student' ?
-          <CRow className='m-0' style={{ width: "100%" }}>
-          <CCol xs={12} sm={6} lg={6}>
-            <CCard className="mb-4">
-              <CCardHeader>Your analytics</CCardHeader>
-              <CCardBody>
-                <CChartBar
-                  data={{
-                    labels: ['Profile', 'Application', 'Document'],
-                    datasets: [
-                      {
-                        label: '-',
-                        backgroundColor: 'rgba(151, 187, 205, 0.2)',
-                        borderColor: 'rgba(151, 187, 205, 1)',
-                        pointBackgroundColor: 'rgba(151, 187, 205, 1)',
-                        pointBorderColor: '#fff',
-                        data: [userData?.user?.count_stats?.school || 0, userData?.user?.count_stats?.application, userData?.user?.count_stats?.file]
-                      },
-                    ],
-                  }}
-                />
-              </CCardBody>
-            </CCard>
-          </CCol>
-            <CCol xs={12} sm={3} lg={3}>
-              <CCard className="mb-4">
-                <CCardHeader>Your analytics</CCardHeader>
-                <CCardBody>
-                  <CChartPie
-                    data={{
-                      labels: ['Profile', 'Application', 'File'],
-                      datasets: [
-                        {
-                          data: [ userData?.user?.count_stats?.application, userData?.user?.count_stats?.programme, userData?.user?.count_stats?.file],
-                          backgroundColor: ['#2eb85c', '#f9b115', '#3399ff'],
-                          hoverBackgroundColor: ['#2eb85c', '#f9b115', '#3399ff'],
-                        },
-                      ],
-                    }}
-                  />
-                </CCardBody>
-              </CCard>
-            </CCol>
-          </CRow>
-          : ""
-      }
-      {
-        userData?.type === 'Student iiiii' ?
-          <CRow className='m-3' style={{ width: "100%" }}>
-
-            <CCol xs={12} sm={8} lg={8} >
-
-              <CCard className="mb-4">
-                <CCardHeader> Application Overview </CCardHeader>
-                <CCardBody>
-
-                  <CTable align="middle" className="mb-0 border" hover responsive>
-                    <CTableHead color="light">
-                      <CTableRow>
-                        <CTableHeaderCell className="text-center">
-                          <CIcon icon={cilAlbum} />
-                        </CTableHeaderCell>
-                        <CTableHeaderCell>Name</CTableHeaderCell>
-                        <CTableHeaderCell className="text-center">Programme</CTableHeaderCell>
-                        <CTableHeaderCell>Status</CTableHeaderCell>
-                        <CTableHeaderCell>Action</CTableHeaderCell>
-                      </CTableRow>
-                    </CTableHead>
-                    <CTableBody>
-                      {schDetails?.data?.map((item, index) => (
-                        <CTableRow v-for="item in tableItems" key={index}>
-                          <CTableDataCell className="text-center">
-                            <CAvatar size="md" src={process.env.REACT_APP_BASE_API + userData?.photo} status={"success"} />
-                          </CTableDataCell>
-                          <CTableDataCell>
-                            <div>{item?.student?.user?.first_name}</div>
-                            <div className="small text-medium-emphasis">
-                              <span>{'New '}</span> | Applied:{' '}
-                              {moment(item?.created_on).format("YYYY-MM-DD")}
-                            </div>
-                          </CTableDataCell>
-                          <CTableDataCell className="text-center">
-                            {item?.description} 
-                            {item?.description}
-                            {/* <CIcon size="xl" icon={item.country.flag} title={item.country.name} /> */}
-                          </CTableDataCell>
-                          <CTableDataCell>
-                            <div className="clearfix">
-                              <div className="float-start ">
-                                <div style={{ width: 50, height: 50 }}>
-                                  <CircularProgressbar
-                                    value={item?.progress || 25}
-                                    text={`${item?.progress || 25}%`}
-                                    background
-                                    backgroundPadding={6}
-                                    styles={buildStyles({
-                                      backgroundColor: "#303c54",
-                                      textColor: "#fff",
-                                      pathColor: "#fff",
-                                      trailColor: "transparent"
-                                    })}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </CTableDataCell>
-                          <CTableDataCell>
-                            <div className="small text-medium-emphasis"></div>
-                            <Badge color='primary' onClick={(e) => { declineConfirm(item?.id, "Decline Application : " + item?.description) }} > Delete </Badge>
-                          </CTableDataCell>
-                        </CTableRow>
-                      ))}
-                    </CTableBody>
-                  </CTable>
-                </CCardBody>
-              </CCard>
-            </CCol>
-
-            <CCol xs={12} sm={4} lg={4}>
-              <CCard className="mb-4">
-                <CCardHeader>Your analytics</CCardHeader>
-                <CCardBody>
-                  <CChartPie
-                    data={{
-                      labels: ['School', 'Application', 'Programme', 'File'],
-                      datasets: [
-                        {
-                          data: [userData?.user?.count_stats?.school || 0, userData?.user?.count_stats?.application, userData?.user?.count_stats?.programme, userData?.user?.count_stats?.file],
-                          backgroundColor: ['#2eb85c', '#f9b115', '#e55353', '#3399ff'],
-                          hoverBackgroundColor: ['#2eb85c', '#f9b115', '#e55353', '#3399ff'],
-                        },
-                      ],
-                    }}
-                  />
-                </CCardBody>
-              </CCard>
-            </CCol>
           </CRow>
           : ""
       }

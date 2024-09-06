@@ -105,7 +105,6 @@ const Evaluation = () => {
                 : ""
         }
 
-
             <Dtable pushData={pushData} />
         </>
     );

@@ -23,17 +23,9 @@ const Page404 = () => {
               <p className="text-medium-emphasis float-start">
                 The page you are looking for was not found.
                 <br />
-                Don{"'"}t have an account? <a href='/signup'> Sign Up </a>
+                Don{"'"}t have an account? <a href='/login'> Login </a>
               </p>
             </div>
-
-            {/* <CInputGroup className="input-prepend"> 
-              <CInputGroupText>
-                <CIcon icon={cilMagnifyingGlass} />
-              </CInputGroupText>
-              <CFormInput type="text" placeholder="What are you looking for?" />
-              <CButton color="info">Search</CButton>
-            </CInputGroup> */}
           </CCol>
         </CRow>
       </CContainer>

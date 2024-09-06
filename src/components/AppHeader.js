@@ -41,7 +41,6 @@ const AppHeader = () => {
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
         <CHeaderBrand className=" danger" to="/">
-          {userData?.user?.cla_ref || ""}
         </CHeaderBrand>
         {/* <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>

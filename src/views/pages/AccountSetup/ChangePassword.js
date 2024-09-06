@@ -85,13 +85,11 @@ export default function SignUp() {
 
   return (
     <div >
-      <div className="bg-light min-vh-100 min-vw-100 d-flex flex-row align-items-center">
-        <CssBaseline />
+    <div className="bg-light min-vw-100 flex-row align-items-center">
+        <CContainer>
 
-          <CContainer>
-
-            <CRow className="justify-content-center">
-              <CCol md={4} lg={3} xl={3}>
+          <CRow className="justify-content-center">
+            <CCol md={5} lg={4} xl={4}>
                 <CCard className="p-0 cl-container">
                   <CCardHeader>
                   </CCardHeader>

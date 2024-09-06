@@ -82,22 +82,22 @@ const account_nav = [
   // }, 
   {
     component: CNavItem,
-    name: 'My application',
+    name: 'Evaluation',
     to: '/evaluation-detail',
     icon: <CIcon icon={cilTransfer} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Basic profile',
+    name: 'Profile',
     to: '/apply-profile',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
-  {
-    component: CNavItem,
-    name: 'Create evaluation profile',
-    to: '/evaluation-profile',
-    icon: <CIcon icon={cilReload} customClassName="nav-icon" />,
-  },
+  // {
+  //   component: CNavItem,
+  //   name: 'Create evaluation profile',
+  //   to: '/evaluation-profile',
+  //   icon: <CIcon icon={cilReload} customClassName="nav-icon" />,
+  // },
   // {
   //   component: CNavGroup,
   //   name: 'P',

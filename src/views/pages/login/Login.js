@@ -158,11 +158,11 @@ const Login = () => {
     setUserTypeError(false)
   }
   return (
-    <div className="bg-light min-vh-100 min-vw-100 d-flex flex-row align-items-center">
-      <CContainer>
+    <div className="bg-light min-vw-100 flex-row align-items-center">
+        <CContainer>
 
-        <CRow className="justify-content-center">
-          <CCol md={4} lg={3} xl={3}>
+          <CRow className="justify-content-center">
+            <CCol md={5} lg={4} xl={4}>            
             <CCard className="p-0 cl-container">
               <CCardBody className='m-0'>
                 <CRow>
@@ -262,8 +262,6 @@ const Login = () => {
                 <div >
                 </div>
                 <p className='mt-10 mb-2 text-center'>
-                  Don{"'"}t have an account? <a href='/signup'> Sign Up </a>
-                  <br />
                   <a href='/reset-password' >Forget Password</a>
                 </p>
               </CCardBody>

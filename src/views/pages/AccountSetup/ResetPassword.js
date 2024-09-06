@@ -213,13 +213,11 @@ export default function SignUp() {
   }
   return (
     <div >
-      <div className="bg-light min-vh-100 min-vw-100 d-flex flex-row align-items-center">
-        <CssBaseline />
-
+      <div className="bg-light min-vw-100 flex-row align-items-center">
           <CContainer>
 
             <CRow className="justify-content-center">
-              <CCol md={4} lg={3} xl={3}>
+              <CCol md={5} lg={4} xl={4}>
                 <CCard className="p-0 cl-container">
                   <CCardHeader>
                   </CCardHeader>
@@ -229,7 +227,6 @@ export default function SignUp() {
                       <CCol xs="12" sm="12" md={12} lg="10" xl="10" className='trade-name' >
                         <span><img src={avatar9} className='mb-0' width="100%" alt="college league" />
                         </span>
-
                         <p className='m-0 text-center fs-6'>
                             Reset Password
                         </p>
@@ -318,8 +315,6 @@ export default function SignUp() {
                     </CRow>
                     <p className='mt-10 mb-2 text-center'>
                       Already have an account? <a href='/login'> Login </a>
-                      <br />
-                      <a href='/reset-password' >Forget Password</a>
                     </p>
                   </CCardBody>
                 </CCard>
