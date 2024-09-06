@@ -56,30 +56,6 @@ const account_nav = [
     //   text: 'NEW',
     // },
   },
-  // {
-  //   component: CNavItem,
-  //   name: 'My application',
-  //   to: '/application-detail',
-  //   icon: <CIcon icon={cilTransfer} customClassName="nav-icon" />,
-  // },
-  // {
-  //   component: CNavItem,
-  //   name: 'Colleges',
-  //   to: '/apply',
-  //   icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-  // },
-  // {
-  //   component: CNavItem,
-  //   name: 'My application',
-  //   to: '/application-detail',
-  //   icon: <CIcon icon={cilTransfer} customClassName="nav-icon" />,
-  // },
-  // {
-  //   component: CNavItem,
-  //   name: 'Colleges',
-  //   to: '/apply',
-  //   icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-  // }, 
   {
     component: CNavItem,
     name: 'Evaluation',
@@ -92,36 +68,7 @@ const account_nav = [
     to: '/apply-profile',
     icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
-  // {
-  //   component: CNavItem,
-  //   name: 'Create evaluation profile',
-  //   to: '/evaluation-profile',
-  //   icon: <CIcon icon={cilReload} customClassName="nav-icon" />,
-  // },
-  // {
-  //   component: CNavGroup,
-  //   name: 'P',
-  //   items: [
-  //     {
-  //       component: CNavItem,
-  //       name: 'Application',
-  //       to: '/application',
-  //       icon: <CIcon icon={cilTransfer} customClassName="nav-icon" />,
-  //     },
-  //     {
-  //       component: CNavItem,
-  //       name: 'Profile',
-  //       to: '/profile',
-  //       icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-  //     },
-  //   ],
-  // },
-  // {
-  //   component: CNavItem,
-  //   name: 'test',
-  //   to: '/test',
-  //   icon: <CIcon icon={cilControl} customClassName="nav-icon" />,
-  // },
+
   
 ]
 
