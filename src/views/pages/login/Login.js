@@ -70,12 +70,11 @@ const Login = () => {
       let data = JSON.stringify({
         "email": usernameVar,
         "password": passwordVar
-
       });
 
       let config = {
         method: 'post',
-        url: process.env.REACT_APP_BASE_API + "/login",
+        url: process.env.REACT_APP_BASE_API + "/auth/eva/login",
         headers: {
           'Content-Type': 'application/json'
         },
