@@ -2,6 +2,8 @@ import React, { Component, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './scss/style.scss'
 import "./generic.css"
+import 'react-circular-progressbar/dist/styles.css';
+
 // import 'https://code.jquery.com/jquery-3.5.1.js'
 // import 'https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js'
 // import 'https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js'

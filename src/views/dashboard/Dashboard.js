@@ -69,7 +69,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios"
 import Swal from 'sweetalert2'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 
 // console.log(" >>><<<", userData)
 const Dashboard = () => {

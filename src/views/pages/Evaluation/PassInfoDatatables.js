@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import $ from 'jquery';
-import { Container, Row, Col, Label, Input } from 'reactstrap';
+import { Container, Row, Col, Label, Input, Badge } from 'reactstrap';
 import 'datatables.net';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
 import axios from 'axios';
@@ -22,6 +22,7 @@ import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 import '../../datatable/table.css';
 import { toast } from 'react-toastify';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import PropTypes, { func } from "prop-types";
 import * as XLSX from 'xlsx';
 
@@ -82,9 +83,9 @@ const PassInfoDatatables = (props) => {
           params: {
           page: currentPage,
           per_page: pageSize,
-          search: searchText,
           start_date: dateRange[0] ? moment(dateRange[0]).format('YYYY-MM-DD') : null,
-          end_date: dateRange[1] ? moment(dateRange[1]).format('YYYY-MM-DD') : null
+          end_date: dateRange[1] ? moment(dateRange[1]).format('YYYY-MM-DD') : null,
+          search: searchText
         },
         headers: {
           'Content-Type': 'application/json',
@@ -119,17 +120,58 @@ const PassInfoDatatables = (props) => {
   const handleSearch = (e) => {
     setSearchText(e.target.value);
   };
+
   const columns = [
     { name: 'No.', selector: (row, index) => index + 1, width: '5%' }, 
-    { name: 'Provider Ref.', width: '12%', selector: row => row?.external_api_reference },
-    { name: 'Date', width: '16%', selector: row => row?.created_at },
+    { name: 'Name', width: '20%', selector: row => row?.name },
+    { name: 'Description', selector: row => row?.description },
     {
-      name: 'Transaction Status',
+      name: 'Progress', width: '20%',
       cell: row => (
-        <CBadge color={row?.status_code === "SUCCESSFUL" ? "success" : (row?.status_code === "PENDING" ? "warning" : (row?.status_code === "REVERSED" ? "secondary" : "danger"))}>{row?.status_code}</CBadge>
+        <div className="clearfix m-0">
+          <div className="float-start m-0">
+            <div style={{ width: 50, height: 50 }} >
+              <CircularProgressbar
+                className='m-1'
+                value={row?.progress || 125}
+                text={`${row?.progress || 25}%`}
+                background
+                backgroundPadding={2}
+                styles={buildStyles({
+                  backgroundColor: "#303c54",
+                  textSize: 29,
+                  display: "flex",
+                  justifyContent: "center",
+                  textColor: "#fff",
+                  pathColor: "#fff",
+                  trailColor: "transparent"
+                })}
+              />
+            </div>
+          </div>
+        </div>
+      )
+    },
+    { name: 'Date', selector: row => row?.created_on },
+    {
+      name: 'Action',
+      cell: row => (
+        <div className="clearfix">
+           <Badge color='primary' className='wp-cursor-pointer m-2'  onClick={() => funE(row)}> View </Badge>
+           <Badge color='secondary' className='wp-cursor-pointer m-2' onClick={() => funEvaluationEdit(row)} > Edit </Badge>
+        </div>
       )
     }
   ];
+
+  function funE(rowIndexData) {
+    // console.log("rowIndexData ", rowIndexData)
+    localStorage.setItem("applicantData", JSON.stringify(rowIndexData));
+    window.location.href = '/evaluation-detail/' + rowIndexData?.applicant_program_id + "/"
+  }
+  function funEvaluationEdit(rowIndexData) {
+    window.location.href = '/evaluation-edit/' + rowIndexData?.applicant_program_id + "/"
+  }
 
   const handleChangeExport = (valSelected) => {
     setTransactionExport(valSelected);
