@@ -133,7 +133,7 @@ const PassInfoDatatables = (props) => {
             <div style={{ width: 50, height: 50 }} >
               <CircularProgressbar
                 className='m-1'
-                value={row?.progress || 125}
+                value={row?.progress || 25}
                 text={`${row?.progress || 25}%`}
                 background
                 backgroundPadding={2}
@@ -167,10 +167,10 @@ const PassInfoDatatables = (props) => {
   function funE(rowIndexData) {
     // console.log("rowIndexData ", rowIndexData)
     localStorage.setItem("applicantData", JSON.stringify(rowIndexData));
-    window.location.href = '/evaluation-detail/' + rowIndexData?.applicant_program_id + "/"
+    window.location.href = '/evaluation-detail/' + rowIndexData?.id + "/"
   }
   function funEvaluationEdit(rowIndexData) {
-    window.location.href = '/evaluation-edit/' + rowIndexData?.applicant_program_id + "/"
+    window.location.href = '/evaluation-edit/' + rowIndexData?.id + "/"
   }
 
   const handleChangeExport = (valSelected) => {

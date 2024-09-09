@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
-import Dtable from './Dtable';
-
 import axios from "axios"
 import Swal from 'sweetalert2'
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CCol, CRow } from '@coreui/react';
 import PassInfoDatatables from './PassInfoDatatables';
-// import { getEvaluation } from 'src/views/dashboard/DashboardData';
 
 
 const userData = JSON.parse(localStorage.getItem("userDataStore"));
 
 const Evaluation = () => {
-    // let userGetInfo = []
-    // let userGetInfoData = getEvaluation();
-    // userGetInfoData?.list?.then(value => { userGetInfo=value });
 
     const [pushData, setPushData] = useState(false)
     //   console.log("userData ", userData)
@@ -106,7 +98,6 @@ const Evaluation = () => {
                 : ""
         }
 
-            {/* <Dtable pushData={pushData} /> */}
             <PassInfoDatatables />
         </>
     );
