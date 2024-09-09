@@ -406,16 +406,16 @@ function evaluationApply(description) {
         <CCol xs={12} sm={6} lg={3}>
           <CWidgetStatsB
             className="mb-4"
-            progress={{ color: 'warning', value: 100 }}
+            progress={{ color: 'info', value: 100 }}
             text="Evaluation request"
-            title="Evaluation"
+            title="Evaluation Count"
             value={evaDetails?.count_stats?.evaluation || "0"}
           />
         </CCol>
         <CCol xs={12} sm={6} lg={3}>
           <CWidgetStatsB
             className="mb-4"
-            progress={{ color: 'success', value: 100 }}
+            progress={{ color: 'danger', value: 100 }}
             text="Rejected Evaluation Request"
             title="Rejected Count"
             value={evaDetails?.count_stats?.evaluation || "0"}
@@ -424,7 +424,16 @@ function evaluationApply(description) {
         <CCol xs={12} sm={6} lg={3}>
           <CWidgetStatsB
             className="mb-4"
-            progress={{ color: 'info', value: 100 }}
+            progress={{ color: 'warning', value: 100 }}
+            text="Evaluation Request Started"
+            title="In progress Count"
+            value={evaDetails?.count_stats?.file || "0"}
+          />
+        </CCol>
+        <CCol xs={12} sm={6} lg={3}>
+          <CWidgetStatsB
+            className="mb-4"
+            progress={{ color: 'success', value: 100 }}
             text="Completed Evaluation Request"
             title="Completed Count"
             value={evaDetails?.count_stats?.file || "0"}

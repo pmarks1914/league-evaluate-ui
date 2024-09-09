@@ -260,7 +260,7 @@ export function getDashEvaluation(){
         if(window.location.pathname === '/dashboard'){
             config_sch = {
                 method: 'get',
-                url: process.env.REACT_APP_BASE_API + "/evaluation-by-student-last-five/" + userData?.user?.student_id + "?per_page=5&page=1",
+                url: process.env.REACT_APP_BASE_API + "/evaluation-paging" + "?per_page=5&page=1",
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': 'Bearer ' + userData?.token

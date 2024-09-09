@@ -7,6 +7,7 @@ import Swal from 'sweetalert2'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CCol, CRow } from '@coreui/react';
+import PassInfoDatatables from './PassInfoDatatables';
 // import { getEvaluation } from 'src/views/dashboard/DashboardData';
 
 
@@ -105,7 +106,8 @@ const Evaluation = () => {
                 : ""
         }
 
-            <Dtable pushData={pushData} />
+            {/* <Dtable pushData={pushData} /> */}
+            <PassInfoDatatables />
         </>
     );
 };
