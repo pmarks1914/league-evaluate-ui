@@ -13,7 +13,7 @@ import {
     CButton,
     CCardGroup,
     CContainer
-} from '@coreui/react';
+} from '@coreui/react'; 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -35,7 +35,7 @@ import CIcon from '@coreui/icons-react'; import {
 } from '@coreui/icons'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import ReactQuill from 'react-quill';
 import Swal from 'sweetalert2';
 
 import 'antd/dist/antd.min.css';
@@ -82,6 +82,8 @@ const EditSubmittedEvaluationInfo = (props) => {
     const [certificateList, setCertificateList] = useState([]);
     const [certificate, setCertificate] = useState([]);
     // profile Certificate loading
+    const [editorContent, setEditorContent] = useState("");
+
 
     useEffect(() => {
         //   getSessionTimeout();
@@ -100,6 +102,9 @@ const EditSubmittedEvaluationInfo = (props) => {
         getFuncEvaluation()
     }, [])
     // console.log("evaluationData ", JSON.stringify(evaluationData))
+    const handleEditorChange = (content, delta, source, editor) => {
+        setEditorContent(content);
+    };
 
     function getFuncEvaluation() {
         // 
@@ -173,9 +178,9 @@ const EditSubmittedEvaluationInfo = (props) => {
         for (const key in getFormData) {
             if (getFormData.hasOwnProperty(key)) {
                 // console.log("<>", key, getFormData[key])
-              formData2.append(key, getFormData[key]);
+                formData2.append(key, getFormData[key]);
             }
-          }
+        }
         // formData2.append('slug', getFormData?.certificate_name);
 
         if (fileType === 1) {
@@ -188,7 +193,7 @@ const EditSubmittedEvaluationInfo = (props) => {
             formData2.append('slug', getFormData?.identification_name);
         }
         console.log(" >>>>>>>", certificateList)
-        if(certificateList?.length > 0){
+        if (certificateList?.length > 0) {
             certificateList?.forEach((cert) => {
 
                 // console.log(cert)
@@ -245,7 +250,7 @@ const EditSubmittedEvaluationInfo = (props) => {
                 }
             });
         }
-        else{
+        else {
             toast.error('No file selected.', {
                 position: toast?.POSITION?.TOP_CENTER
             });
@@ -322,7 +327,7 @@ const EditSubmittedEvaluationInfo = (props) => {
         }
         else if (section === "contact") {
             if (method === "patch") {
-                data = {"evaluation_info": getFormData }  
+                data = { "evaluation_info": getFormData }
                 config = {
                     method: method,
                     url: process.env.REACT_APP_BASE_API + "/evaluation/" + evaluation_id,
@@ -337,7 +342,7 @@ const EditSubmittedEvaluationInfo = (props) => {
         else if (section === "address") {
             // console.log(getFormData)
             if (method === "patch") {
-                data = {"evaluation_info": getFormData }  
+                data = { "evaluation_info": getFormData }
                 config = {
                     method: method,
                     url: process.env.REACT_APP_BASE_API + "/evaluation/" + evaluation_id,
@@ -389,7 +394,7 @@ const EditSubmittedEvaluationInfo = (props) => {
         else if (section === "purpose_evaluation") {
             // console.log(getFormData)
             if (method === "patch") {
-                data = {"evaluation_info": getFormData }  
+                data = { "evaluation_info": getFormData }
                 config = {
                     method: method,
                     url: process.env.REACT_APP_BASE_API + "/evaluation/" + evaluation_id,
@@ -404,7 +409,7 @@ const EditSubmittedEvaluationInfo = (props) => {
         else if (section === "user_preference") {
             // console.log(getFormData)
             if (method === "patch") {
-                data = {"evaluation_info": getFormData }  
+                data = { "evaluation_info": getFormData }
                 config = {
                     method: method,
                     url: process.env.REACT_APP_BASE_API + "/evaluation/" + evaluation_id,
@@ -416,11 +421,10 @@ const EditSubmittedEvaluationInfo = (props) => {
                 };
             }
         }
-
         else if (section === "education_background") {
             // console.log(getFormData)
             if (method === "patch") {
-                data = {"evaluation_info": getFormData }  
+                data = { "evaluation_info": getFormData }
 
                 config = {
                     method: method,
@@ -435,8 +439,8 @@ const EditSubmittedEvaluationInfo = (props) => {
         }
         else if (section === "recipient_institution_detail") {
             // console.log(getFormData)   
-            if (method === "patch") { 
-                data = {"evaluation_info": getFormData }  
+            if (method === "patch") {
+                data = { "evaluation_info": getFormData }
                 config = {
                     method: method,
                     url: process.env.REACT_APP_BASE_API + "/evaluation/" + evaluation_id,
@@ -450,8 +454,8 @@ const EditSubmittedEvaluationInfo = (props) => {
         }
         else if (section === "payment_method") {
             // console.log(getFormData)   
-            if (method === "patch") { 
-                data = {"evaluation_info": getFormData }  
+            if (method === "patch") {
+                data = { "evaluation_info": getFormData }
                 config = {
                     method: method,
                     url: process.env.REACT_APP_BASE_API + "/evaluation/" + evaluation_id,
@@ -465,7 +469,7 @@ const EditSubmittedEvaluationInfo = (props) => {
         }
         else if (section === "verification_reference") {
             // console.log("evaluationData", getFormData)   
-            data = {"evaluation_info": getFormData }            
+            data = { "evaluation_info": getFormData }
             if (method === "patch") {
                 config = {
                     method: method,
@@ -476,6 +480,24 @@ const EditSubmittedEvaluationInfo = (props) => {
                     },
                     data: data
                 };
+            }
+        }
+        else if (section === "evaluator_content") {
+            // console.log("evaluationData", getFormData) 
+            if( editorContent !== "" ){
+                //   
+                data = { "content": editorContent }
+                if (method === "patch") {
+                    config = {
+                        method: method,
+                        url: process.env.REACT_APP_BASE_API + "/evaluation/" + evaluation_id,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + userData?.token
+                        },
+                        data: data
+                    };
+                }
             }
         }
 
@@ -552,13 +574,130 @@ const EditSubmittedEvaluationInfo = (props) => {
     return (
         <div className="App" onClick={() => trackActivity()}>
             <CRow className='mt-0 mb-0'>
-                <CCol lg={12} style={{ textAlign: 'right' }} className='mt-3 mb-0'> 
-                    <h5 className='mt-0 mb-0'> {evaluationData?.name} </h5> 
-                    <p className='mt-0 mb-0'> 
-                        {evaluationData?.description?.length > 15 ? `${(evaluationData?.description)?.slice(0, 15)}...` : evaluationData?.description} 
+                <CCol lg={12} style={{ textAlign: 'right' }} className='mt-3 mb-0'>
+                    <h5 className='mt-0 mb-0'> {evaluationData?.name} </h5>
+                    <p className='mt-0 mb-0'>
+                        {evaluationData?.description?.length > 15 ? `${(evaluationData?.description)?.slice(0, 15)}...` : evaluationData?.description}
                     </p>
                 </CCol>
             </CRow>
+
+            {
+                props?.profileManage === "evaluator" ?
+                    <CAccordion activeItemKey={1} className="mt-0">
+                        <h6> Evaluation Reporting </h6>
+                        <CAccordionItem itemKey={1}>
+                            <CAccordionHeader> Comments </CAccordionHeader>
+                            <CAccordionBody>
+                                <div className='m-2'>
+                                    <ReactQuill
+                                        value={editorContent || evaluationData?.content }
+                                        onChange={handleEditorChange}
+                                        placeholder="Write comment..."
+                                        style={{ "height": "300px" }}
+                                        id="evaluator_pass"
+                                    />
+                                    <InputLabel shrink htmlFor="evaluator_pass"> </InputLabel>
+                                    <br /><br />
+
+                                </div>
+                                {
+                                    editorContent === "" ? "" :                                
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    sx={{ mt: 3, mb: 2 }}
+                                    // style={{ color: "#fff" }}
+                                    // className="bg-text-com-wp"
+                                    onClick={(e) => passConfiguration("add", "patch", "evaluator_content", 419)}
+                                >
+                                    Save
+                                </Button>
+                                }
+                            </CAccordionBody>
+                        </CAccordionItem>
+                        <CAccordionItem itemKey={2}>
+                            <CAccordionHeader> Reporting Document </CAccordionHeader>
+                            <CAccordionBody>
+
+                                <div className='mui-control-form' >
+                                    <Box
+                                        component="form"
+                                        noValidate
+                                        autoComplete="on"
+                                    >
+                                        <Row className='ml-4 mt-0 mb-5'>
+                                            <Col sm="4" xs="4" md="4" lg="4" xl="4" className='float-left mr-2 ml-5'>
+                                            </Col>
+                                            <Col sm="12" xs="12" md="12" lg="12" xl="12" className='mt-0 '>
+
+                                                <TextField
+                                                    error={getFormDataError?.evaluatorReportDate}
+                                                    // value={moment(evaluationData?.evaluation_info?.dob).format("LLLL")}
+                                                    margin="normal"
+                                                    required
+                                                    fullWidth
+                                                    type="date"
+                                                    max={"2000-01-01"}
+                                                    value={moment(evaluationData?.evaluation_info?.evaluatorReportDate).format("YYYY-MM-DD")}
+                                                    placeholder="Date issued"
+                                                    name="evaluatorReportDate"
+                                                    autoFocus
+                                                    variant="outlined"
+                                                    className='mt-1 mb-0'
+                                                    onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "evaluatorReportDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormData({ ...getFormData, ...{ "evaluatorReportDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormDataError({ ...getFormDataError, ...{ "evaluatorReportDate": false } }) }}
+                                                />
+                                                <InputLabel shrink htmlFor="evaluatorReportDate"> Date issued </InputLabel>
+                                            </Col>
+                                            {/* <Col sm="2" xs="2" md="2" lg="2" xl="2" className='float-left ml-2'> {evaluationData?.evaluation_info?.evaluatorReportDate} </Col> */}
+                                        </Row>
+                                    </Box>
+
+                                </div>
+
+                                <strong>Upload report document </strong>
+                                <p className='mt-2 mb-1'>Your file size must be less than 1.22 MB</p>
+                                <Upload {...props2} onChange={(e) => { setProfileCertificate(e?.target?.value || null) }} value={profileCertificate} maxCount={1} >
+                                    <ButtonGroup variant='outline' spacing='6'>
+                                        <Button className='bg-secondary text-white' ><CIcon icon={cilCloudDownload} className="me-2" /> Select a document </Button>
+                                    </ButtonGroup>
+                                </Upload>
+
+
+
+                                {evaluationData?.evaluation_info?.evaluatorReport < 0 ? "" :
+                                    <Button
+                                        type="submit"
+                                        fullWidth
+                                        variant="contained"
+                                        sx={{ mt: 3, mb: 2 }}
+                                        onClick={() => handleCertificateUpload(6)}
+                                        disabled={uploading}
+                                    >
+                                        {uploading ? 'Uploading' : 'Submit'}
+                                    </Button>
+                                }
+                                <p className='mt-3 mb-1'>
+                                    <strong > Evaluator Report document </strong>
+                                    {
+                                        evaluationData?.evaluation_info?.evaluatorReport ?
+                                            <Row>
+                                                <Col xs="6" sm="6" md={6} lg={6} className="mt-2" > <a href={evaluationData?.evaluation_info?.evaluatorReport} target='_blank' rel="noreferrer" > View File </a> </Col>
+                                                {/* <Col xs="4" sm="4" md={4} lg={4} className="mt-2" >
+                                                        <Badge color='primary' className='wp-cursor-pointer' onClick={(e) => { passConfiguration(e, "delete", "report", "file") }} >Delete</Badge>
+                                                    </Col> */}
+                                            </Row>
+                                            : ''
+                                    }
+                                </p>
+                            </CAccordionBody>
+                        </CAccordionItem>
+
+
+                    </CAccordion>
+                    : ""
+            }
             {
                 props?.profileManage === "education" ?
                     <p>
@@ -570,13 +709,15 @@ const EditSubmittedEvaluationInfo = (props) => {
                                     <div className='mui-control-form' >
 
                                         <Select
-                                            placeholder={ evaluationData?.evaluation_info?.certificate_name || "Type of Certificate "}
+                                            isDisabled={true}
+                                            placeholder={evaluationData?.evaluation_info?.certificate_name || "Type of Certificate "}
                                             defaultInputValue={evaluationData?.evaluation_info?.certificate_name}
                                             options={optionsStateDoc}
+                                            disabled={true}
                                             id="certname"
                                             className='other-input-select d-filters wp-cursor-pointer mt-4'
-                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "certificate_name": e.value } }); setGetFormData({ ...getFormData, ...{ "certificate_name": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "certificate_name": false } })}}
-                                        />                                        
+                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "certificate_name": e.value } }); setGetFormData({ ...getFormData, ...{ "certificate_name": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "certificate_name": false } }) }}
+                                        />
                                         <InputLabel shrink htmlFor="certname"> Type of Certificate </InputLabel>
 
                                         <Box
@@ -589,7 +730,9 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                 <Col sm="2" xs="2" md="2" lg="2" xl="2" className=''></Col>
                                                 <Col sm="12" xs="12" md="12" lg="12" xl="12" className=''>
 
+
                                                     <TextField
+                                                        disabled={true}
                                                         error={getFormDataError?.certificateDate}
                                                         // value={moment(evaluationData?.evaluation_info?.dob).format("LLLL")}
                                                         margin="normal"
@@ -603,7 +746,7 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                         autoFocus
                                                         variant="outlined"
                                                         className='mt-1 mb-0'
-                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "certificateDate": moment( e.target.value ).format('YYYY-MM-DD') } }); setGetFormData({ ...getFormData, ...{ "certificateDate": moment( e.target.value ).format('YYYY-MM-DD') } }); setGetFormDataError({ ...getFormDataError, ...{ "certificateDate": false } })}}
+                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "certificateDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormData({ ...getFormData, ...{ "certificateDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormDataError({ ...getFormDataError, ...{ "certificateDate": false } }) }}
                                                     />
                                                     <InputLabel shrink htmlFor="certificateDate"> Date issued </InputLabel>
                                                 </Col>
@@ -611,30 +754,9 @@ const EditSubmittedEvaluationInfo = (props) => {
                                         </Box>
 
                                     </div>
-
-                                    <strong>Upload your educational document(s) - Certificate </strong>
-                                    <p className='mt-2 mb-1'>Your file size must be less than 1.22 MB</p>
-                                    <Upload {...props2} onChange={(e) => { setProfileCertificate(e?.target?.value || null) }} value={profileCertificate} maxCount={1} >
-                                        <ButtonGroup variant='outline' spacing='6'>
-                                            <Button className='bg-secondary text-white' ><CIcon icon={cilCloudDownload} className="me-2" /> Select a certificate </Button>
-                                        </ButtonGroup>
-                                    </Upload>
-                                    {
-                                        evaluationData?.evaluation_info?.certificate < 0 ? "" :
-                                            <Button
-                                                type="submit"
-                                                fullWidth
-                                                variant="contained"
-                                                sx={{ mt: 3, mb: 2 }}
-                                                onClick={() => handleCertificateUpload(1)}
-                                                disabled={uploading}
-                                            >
-                                                {uploading ? 'Uploading' : 'Submit'}
-                                            </Button>
-                                    }
                                     <p className='mt-3 mb-1'>
 
-                                        <strong >Your educational document </strong>
+                                        <strong >Educational document </strong>
                                         {
                                             evaluationData?.evaluation_info?.certificate ?
                                                 <Row>
@@ -655,12 +777,13 @@ const EditSubmittedEvaluationInfo = (props) => {
                                     <div className='mui-control-form' >
 
                                         <Select
+                                            isDisabled={true}
                                             placeholder={evaluationData?.evaluation_info?.transcript_name || "Type of Transcript "}
                                             defaultInputValue={evaluationData?.evaluation_info?.transcript_name}
                                             options={optionsStateDoc}
                                             id="transcript_name"
                                             className='other-input-select d-filters wp-cursor-pointer mt-0 mb-0'
-                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "transcript_name": e.value } }); setGetFormData({ ...getFormData, ...{ "transcript_name": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "transcript_name": false } })}}
+                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "transcript_name": e.value } }); setGetFormData({ ...getFormData, ...{ "transcript_name": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "transcript_name": false } }) }}
                                         />
                                         <InputLabel shrink htmlFor="transcript_name"> Type of Transcript </InputLabel>
 
@@ -670,11 +793,13 @@ const EditSubmittedEvaluationInfo = (props) => {
                                             autoComplete="on"
                                         >
                                             <Row className='ml-4 mt-0 mb-5'>
-                                                <Col sm="4" xs="4" md="4" lg="4" xl="4" className='float-left mr-2 ml-5'>                                                   
+                                                <Col sm="4" xs="4" md="4" lg="4" xl="4" className='float-left mr-2 ml-5'>
                                                 </Col>
                                                 <Col sm="12" xs="12" md="12" lg="12" xl="12" className=''>
 
+
                                                     <TextField
+                                                        disabled={true}
                                                         error={getFormDataError?.transcriptDate}
                                                         // value={moment(evaluationData?.evaluation_info?.dob).format("LLLL")}
                                                         margin="normal"
@@ -688,7 +813,7 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                         autoFocus
                                                         variant="outlined"
                                                         className='mt-0 mb-0'
-                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "transcriptDate": moment( e.target.value ).format('YYYY-MM-DD') } }); setGetFormData({ ...getFormData, ...{ "transcriptDate": moment( e.target.value ).format('YYYY-MM-DD') } }); setGetFormDataError({ ...getFormDataError, ...{ "transcriptDate": false } })}}
+                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "transcriptDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormData({ ...getFormData, ...{ "transcriptDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormDataError({ ...getFormDataError, ...{ "transcriptDate": false } }) }}
                                                     />
                                                     <InputLabel shrink htmlFor="transcriptDate"> Date issued </InputLabel>
                                                 </Col>
@@ -697,29 +822,8 @@ const EditSubmittedEvaluationInfo = (props) => {
                                         </Box>
 
                                     </div>
-
-                                    <strong>Upload your educational document(s) - Transcript</strong>
-                                    <p className='mt-2 mb-1'>Your file size must be less than 1.22 MB</p>
-                                    <Upload {...props2} onChange={(e) => { setProfileCertificate(e?.target?.value || null) }} value={profileCertificate} maxCount={1} >
-                                        <ButtonGroup variant='outline' spacing='6'>
-                                            <Button className='bg-secondary text-white' ><CIcon icon={cilCloudDownload} className="me-2" /> Select a transcript </Button>
-                                        </ButtonGroup>
-                                    </Upload>
-                                    {
-                                        evaluationData?.evaluation_info?.transcript < 0 ? "" :
-                                            <Button
-                                                type="submit"
-                                                fullWidth
-                                                variant="contained"
-                                                sx={{ mt: 3, mb: 2 }}
-                                                onClick={() => handleCertificateUpload(2)}
-                                                disabled={uploading}
-                                            >
-                                                {uploading ? 'Uploading' : 'Submit'}
-                                            </Button>
-                                    }
                                     <p className='mt-3 mb-1'>
-                                        <strong >Your educational document(s)</strong>
+                                        <strong >Educational document(s)</strong>
                                         {
                                             evaluationData?.evaluation_info?.transcript ?
                                                 <Row>
@@ -745,7 +849,9 @@ const EditSubmittedEvaluationInfo = (props) => {
                                         >
                                             <Row className='ml-4 mt-4 mb-5'>
                                                 <Col sm="12" xs="12" md="12" lg="12" xl="12" className='float-left mb-5 mr-2 ml-5'>
+
                                                     <TextField
+                                                        disabled={true}
                                                         error={getFormDataError?.degree_obtained}
                                                         value={evaluationData?.evaluation_info?.degree_obtained}
                                                         id="degree_obtained"
@@ -757,13 +863,15 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                         type="text"
                                                         fullWidth
                                                         required
-                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "degree_obtained": e.target.value } }); setGetFormData({ ...getFormData, ...{ "degree_obtained": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "degree_obtained": false } })}}
+                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "degree_obtained": e.target.value } }); setGetFormData({ ...getFormData, ...{ "degree_obtained": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "degree_obtained": false } }) }}
                                                     />
                                                     <InputLabel shrink htmlFor="degree_obtained"> Degree Obtained </InputLabel>
                                                 </Col>
 
                                                 <Col sm="12" xs="12" md="12" lg="12" xl="12" className='float-left mb-5 mr-2 ml-5'>
+
                                                     <TextField
+                                                        disabled={true}
                                                         error={getFormDataError?.major_study}
                                                         value={evaluationData?.evaluation_info?.major_study}
                                                         id="major_study"
@@ -775,12 +883,14 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                         type="text"
                                                         fullWidth
                                                         required
-                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "major_study": e.target.value } }); setGetFormData({ ...getFormData, ...{ "major_study": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "major_study": false } })}}
+                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "major_study": e.target.value } }); setGetFormData({ ...getFormData, ...{ "major_study": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "major_study": false } }) }}
                                                     />
                                                     <InputLabel shrink htmlFor="major_study"> Major Study </InputLabel>
                                                 </Col>
                                                 <Col sm="12" xs="12" md="12" lg="12" xl="12" className='float-left mb-5 mr-2 ml-5'>
+
                                                     <TextField
+                                                        disabled={true}
                                                         error={getFormDataError?.gpa}
                                                         value={evaluationData?.evaluation_info?.gpa}
                                                         id="gpa"
@@ -793,13 +903,15 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                         inputProps={{ min: 0, max: 5 }}
                                                         fullWidth
                                                         required
-                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "gpa": e.target.value } }); setGetFormData({ ...getFormData, ...{ "gpa": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "gpa": false } })}}
+                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "gpa": e.target.value } }); setGetFormData({ ...getFormData, ...{ "gpa": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "gpa": false } }) }}
                                                     />
                                                     <InputLabel shrink htmlFor="gpa"> GPA </InputLabel>
                                                 </Col>
 
                                                 <Col sm="12" xs="12" md="12" lg="12" xl="12" className='mb-5'>
+
                                                     <TextField
+                                                        disabled={true}
                                                         error={getFormDataError?.school_year_from}
                                                         // value={moment(evaluationData?.evaluation_info?.school_year_from).format("LLLL")}
                                                         margin="normal"
@@ -814,13 +926,15 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                         variant="outlined"
                                                         className='mt-1 mb-0'
                                                         // className='mb-5 '
-                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "school_year_from": e.target.value } }); setGetFormData({ ...getFormData, ...{ "school_year_from": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "school_year_from": false } })}}
+                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "school_year_from": e.target.value } }); setGetFormData({ ...getFormData, ...{ "school_year_from": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "school_year_from": false } }) }}
                                                     />
                                                     <InputLabel shrink htmlFor="school_year_from"> Date from </InputLabel>
                                                 </Col>
 
                                                 <Col sm="12" xs="12" md="12" lg="12" xl="12" className=''>
+
                                                     <TextField
+                                                        disabled={true}
                                                         error={getFormDataError?.school_year_to}
                                                         // value={moment(evaluationData?.evaluation_info?.school_year_to).format("LLLL")}
                                                         margin="normal"
@@ -834,7 +948,7 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                         autoFocus
                                                         variant="outlined"
                                                         className='mt-1 mb-0'
-                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "school_year_to": e.target.value } }); setGetFormData({ ...getFormData, ...{ "school_year_to": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "school_year_to": false } })}}
+                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "school_year_to": e.target.value } }); setGetFormData({ ...getFormData, ...{ "school_year_to": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "school_year_to": false } }) }}
                                                     />
                                                     <InputLabel shrink htmlFor="school_year_to"> Date to </InputLabel>
                                                 </Col>
@@ -843,19 +957,6 @@ const EditSubmittedEvaluationInfo = (props) => {
 
                                     </div>
 
-                                    <Button
-                                        type="submit"
-                                        fullWidth
-                                        variant="contained"
-                                        sx={{ mt: 3, mb: 2 }}
-                                        // onClick={(e) => handleCertificateUpload(1)}
-                                        onClick={(e) => passConfiguration("add", "patch", "education_background", 419)}
-                                        disabled={uploading}
-                                    //   onClick={(e)=>handleSubmit(e)}
-                                    >
-                                        {/* Save */}
-                                        {uploading ? 'saving' : 'Submit'}
-                                    </Button>
                                 </CAccordionBody>
                             </CAccordionItem>
                         </CAccordion>
@@ -874,12 +975,13 @@ const EditSubmittedEvaluationInfo = (props) => {
                                     <div className='mui-control-form' >
 
                                         <Select
+                                            isDisabled={true}
                                             placeholder={evaluationData?.evaluation_info?.identification_name || "Type of Identification Documents "}
                                             defaultInputValue={evaluationData?.evaluation_info?.identification_name}
                                             options={optionsIdDoc}
                                             id="identification_name"
                                             className='other-input-select d-filters wp-cursor-pointer mt-4 mb-0'
-                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "identification_name": e.value } }); setGetFormData({ ...getFormData, ...{ "identification_name": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "identification_name": false } })}}
+                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "identification_name": e.value } }); setGetFormData({ ...getFormData, ...{ "identification_name": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "identification_name": false } }) }}
                                         />
                                         <InputLabel shrink htmlFor="identification_name"> Type of Identification Documents </InputLabel>
 
@@ -892,7 +994,9 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                 <Col sm="2" xs="2" md="2" lg="2" xl="2" className=''></Col>
                                                 <Col sm="12" xs="12" md="12" lg="12" xl="12" className=''>
 
+
                                                     <TextField
+                                                        disabled={true}
                                                         error={getFormDataError?.identificationDate}
                                                         // value={moment(evaluationData?.evaluation_info?.dob).format("LLLL")}
                                                         margin="normal"
@@ -906,7 +1010,7 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                         autoFocus
                                                         variant="outlined"
                                                         className='mt-0 mb-0'
-                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "identificationDate": moment( e.target.value ).format('YYYY-MM-DD') } }); setGetFormData({ ...getFormData, ...{ "identificationDate": moment( e.target.value ).format('YYYY-MM-DD') } }); setGetFormDataError({ ...getFormDataError, ...{ "identificationDate": false } })}}
+                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "identificationDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormData({ ...getFormData, ...{ "identificationDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormDataError({ ...getFormDataError, ...{ "identificationDate": false } }) }}
                                                     />
                                                     <InputLabel shrink htmlFor="identificationDate"> Date issued </InputLabel>
                                                 </Col>
@@ -914,32 +1018,8 @@ const EditSubmittedEvaluationInfo = (props) => {
                                         </Box>
 
                                     </div>
-
-                                    <strong>Upload your document(s) </strong>
-                                    <p className='mt-2 mb-1'>Your file size must be less than 1.22 MB</p>
-                                    <Upload {...props2} onChange={(e) => { setProfileCertificate(e?.target?.value || null) }} value={profileCertificate} maxCount={1} >
-                                        <ButtonGroup variant='outline' spacing='6'>
-                                            <Button className='bg-secondary text-white' ><CIcon icon={cilCloudDownload} className="me-2" /> Select a document </Button>
-                                        </ButtonGroup>
-                                    </Upload>
-
-
-                                    
-                                    {
-                                        evaluationData?.evaluation_info?.identification < 0 ? "" :
-                                            <Button
-                                                type="submit"
-                                                fullWidth
-                                                variant="contained"
-                                                sx={{ mt: 3, mb: 2 }}
-                                                onClick={() => handleCertificateUpload(3)}
-                                                disabled={uploading}
-                                            >
-                                                {uploading ? 'Uploading' : 'Submit'}
-                                            </Button>
-                                    }
                                     <p className='mt-3 mb-1'>
-                                        <strong >Your educational document(s)</strong>
+                                        <strong >Educational document(s)</strong>
                                         {
                                             evaluationData?.evaluation_info?.identification ?
                                                 <Row>
@@ -968,7 +1048,9 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                 </Col>
                                                 <Col sm="12" xs="12" md="12" lg="12" xl="12" className='mt-0 '>
 
+
                                                     <TextField
+                                                        disabled={true}
                                                         error={getFormDataError?.reportDate}
                                                         // value={moment(evaluationData?.evaluation_info?.dob).format("LLLL")}
                                                         margin="normal"
@@ -982,7 +1064,7 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                         autoFocus
                                                         variant="outlined"
                                                         className='mt-1 mb-0'
-                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "reportDate": moment( e.target.value ).format('YYYY-MM-DD') } }); setGetFormData({ ...getFormData, ...{ "reportDate": moment( e.target.value ).format('YYYY-MM-DD') } }); setGetFormDataError({ ...getFormDataError, ...{ "reportDate": false } })}}
+                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "reportDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormData({ ...getFormData, ...{ "reportDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormDataError({ ...getFormDataError, ...{ "reportDate": false } }) }}
                                                     />
                                                     <InputLabel shrink htmlFor="reportDate"> Date issued </InputLabel>
                                                 </Col>
@@ -991,31 +1073,8 @@ const EditSubmittedEvaluationInfo = (props) => {
                                         </Box>
 
                                     </div>
-
-                                    <strong>Upload your document(s) </strong>
-                                    <p className='mt-2 mb-1'>Your file size must be less than 1.22 MB</p>
-                                    <Upload {...props2} onChange={(e) => { setProfileCertificate(e?.target?.value || null) }} value={profileCertificate} maxCount={1} >
-                                        <ButtonGroup variant='outline' spacing='6'>
-                                            <Button className='bg-secondary text-white' ><CIcon icon={cilCloudDownload} className="me-2" /> Select a document </Button>
-                                        </ButtonGroup>
-                                    </Upload>
-
-
-                                    
-                                    { evaluationData?.evaluation_info?.report < 0 ? "" :
-                                            <Button
-                                                type="submit"
-                                                fullWidth
-                                                variant="contained"
-                                                sx={{ mt: 3, mb: 2 }}
-                                                onClick={() => handleCertificateUpload(4)}
-                                                disabled={uploading}
-                                            >
-                                                {uploading ? 'Uploading' : 'Submit'}
-                                            </Button>
-                                    }
                                     <p className='mt-3 mb-1'>
-                                        <strong >Your educational document(s)</strong>
+                                        <strong >Educational document(s)</strong>
                                         {
                                             evaluationData?.evaluation_info?.report ?
                                                 <Row>
@@ -1038,13 +1097,15 @@ const EditSubmittedEvaluationInfo = (props) => {
                                             component="form"
                                             noValidate
                                             autoComplete="on"
-                                        >                                        
+                                        >
                                             <Row className='ml-4 mt-0 mb-5'>
                                                 <Col sm="4" xs="4" md="4" lg="4" xl="4" className='float-left mr-2 ml-5'>
                                                 </Col>
                                                 <Col sm="12" xs="12" md="12" lg="12" xl="12" className=''>
 
+
                                                     <TextField
+                                                        disabled={true}
                                                         error={getFormDataError?.letterRecommendationDate}
                                                         // value={moment(evaluationData?.evaluation_info?.dob).format("LLLL")}
                                                         margin="normal"
@@ -1058,7 +1119,7 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                         autoFocus
                                                         variant="outlined"
                                                         className='mt-1 mb-0'
-                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "letterRecommendationDate": moment( e.target.value ).format('YYYY-MM-DD') } }); setGetFormData({ ...getFormData, ...{ "letterRecommendationDate": moment( e.target.value ).format('YYYY-MM-DD') } }); setGetFormDataError({ ...getFormDataError, ...{ "letterRecommendationDate": false } })}}
+                                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "letterRecommendationDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormData({ ...getFormData, ...{ "letterRecommendationDate": moment(e.target.value).format('YYYY-MM-DD') } }); setGetFormDataError({ ...getFormDataError, ...{ "letterRecommendationDate": false } }) }}
                                                     />
                                                     <InputLabel shrink htmlFor="letterRecommendationDate"> Date issued </InputLabel>
                                                 </Col>
@@ -1067,30 +1128,8 @@ const EditSubmittedEvaluationInfo = (props) => {
                                         </Box>
 
                                     </div>
-
-                                    <strong>Upload your document(s)</strong>
-                                    <p className='mt-2 mb-1'>Your file size must be less than 1.22 MB</p>
-                                    <Upload {...props2} onChange={(e) => { setProfileCertificate(e?.target?.value || null) }} value={profileCertificate} maxCount={1} >
-                                        <ButtonGroup variant='outline' spacing='6'>
-                                            <Button className='bg-secondary text-white' ><CIcon icon={cilCloudDownload} className="me-2" /> Select a document </Button>
-                                        </ButtonGroup>
-                                    </Upload>
-
-                                    { 
-                                        evaluationData?.evaluation_info?.recommendation < 0 ? "" :
-                                            <Button
-                                                type="submit"
-                                                fullWidth
-                                                variant="contained"
-                                                sx={{ mt: 3, mb: 2 }}
-                                                onClick={() => handleCertificateUpload(5)}
-                                                disabled={uploading}
-                                            >
-                                                {uploading ? 'Uploading' : 'Submit'}
-                                            </Button>
-                                    }
                                     <p className='mt-3 mb-1'>
-                                        <strong >Your educational document(s)</strong>
+                                        <strong >Educational document(s)</strong>
                                         {
                                             evaluationData?.evaluation_info?.recommendation ?
                                                 <Row>
@@ -1104,7 +1143,7 @@ const EditSubmittedEvaluationInfo = (props) => {
                                     </p>
                                 </CAccordionBody>
                             </CAccordionItem>
-                            
+
                         </CAccordion>
                     </p>
                     : ""
@@ -1119,27 +1158,16 @@ const EditSubmittedEvaluationInfo = (props) => {
 
                                 <div className='mui-control-form' >
                                     <Select
+                                        isDisabled={true}
                                         placeholder={evaluationData?.evaluation_info?.purpose_evaluation}
                                         defaultInputValue={evaluationData?.evaluation_info?.purpose_evaluation}
                                         options={purposeEvaluation}
                                         id="purpose_evaluation"
                                         className='other-input-select d-filters wp-cursor-pointer mb-0'
-                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "purpose_evaluation": e.value } }); setGetFormData({ ...getFormData, ...{ "purpose_evaluation": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "purpose_evaluation": false } })}}
+                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "purpose_evaluation": e.value } }); setGetFormData({ ...getFormData, ...{ "purpose_evaluation": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "purpose_evaluation": false } }) }}
                                     />
                                     <InputLabel shrink htmlFor="purpose_evaluation"> Purpose of Evaluation </InputLabel>
                                 </div>
-
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
-                                    // style={{ color: "#fff" }}
-                                    // className="bg-text-com-wp"
-                                    onClick={(e) => passConfiguration("add", "patch", "purpose_evaluation", 419)}
-                                >
-                                    Save
-                                </Button>
                             </CAccordionBody>
                         </CAccordionItem>
                         <CAccordionItem itemKey={2}>
@@ -1153,7 +1181,9 @@ const EditSubmittedEvaluationInfo = (props) => {
                                             noValidate
                                             autoComplete="on"
                                         >
+
                                             <TextField
+                                                disabled={true}
                                                 error={getFormDataError?.user_preference_email}
                                                 value={evaluationData?.evaluation_info?.user_preference_email || evaluationData?.evaluation_info?.email}
                                                 id="user_preference_email"
@@ -1165,11 +1195,13 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                 type="email"
                                                 fullWidth
                                                 required
-                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "user_preference_email": e.target.value } }); setGetFormData({ ...getFormData, ...{ "user_preference_email": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "user_preference_email": false } })}}
+                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "user_preference_email": e.target.value } }); setGetFormData({ ...getFormData, ...{ "user_preference_email": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "user_preference_email": false } }) }}
                                             />
                                             <InputLabel shrink htmlFor="user_preference_email"> Preference Contact Email </InputLabel>
 
+
                                             <TextField
+                                                disabled={true}
                                                 error={getFormDataError?.user_preference_phone}
                                                 value={evaluationData?.evaluation_info?.user_preference_phone || evaluationData?.evaluation_info?.phone}
                                                 margin="normal"
@@ -1181,22 +1213,12 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                 autoFocus
                                                 variant="outlined"
                                                 className='mt-3 mb-0'
-                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "user_preference_phone": e.target.value } });  setGetFormData({ ...getFormData, ...{ "user_preference_phone": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "user_preference_phone": false } })}}
+                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "user_preference_phone": e.target.value } }); setGetFormData({ ...getFormData, ...{ "user_preference_phone": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "user_preference_phone": false } }) }}
                                             />
                                             <InputLabel shrink htmlFor="user_preference_phone"> Preference Contact Phone Number </InputLabel>
                                         </Box>
                                     </div>
                                 </CCol>
-
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
-                                    onClick={(e) => passConfiguration("add", "patch", "user_preference", 419)}
-                                >
-                                    Save
-                                </Button>
                             </CAccordionBody>
                         </CAccordionItem>
                         <CAccordionItem itemKey={3}>
@@ -1210,7 +1232,9 @@ const EditSubmittedEvaluationInfo = (props) => {
                                             noValidate
                                             autoComplete="on"
                                         >
+
                                             <TextField
+                                                disabled={true}
                                                 error={getFormDataError?.institution_name}
                                                 value={evaluationData?.evaluation_info?.institution_name}
                                                 id="institution_name"
@@ -1222,12 +1246,12 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                 type="text"
                                                 fullWidth
                                                 required
-                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "institution_name": e.target.value } }); setGetFormData({ ...getFormData, ...{ "institution_name": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "institution_name": false } })}}
+                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "institution_name": e.target.value } }); setGetFormData({ ...getFormData, ...{ "institution_name": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "institution_name": false } }) }}
                                             />
                                             <InputLabel shrink htmlFor="institution_name"> Name of Institution </InputLabel>
 
-
                                             <TextField
+                                                disabled={true}
                                                 error={getFormDataError?.department_office}
                                                 value={evaluationData?.evaluation_info?.department_office}
                                                 margin="normal"
@@ -1239,13 +1263,15 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                 autoFocus
                                                 variant="outlined"
                                                 className='mt-4 mb-0'
-                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "department_office": e.target.value } }); setGetFormData({ ...getFormData, ...{ "department_office": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "department_office": false } })}}
+                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "department_office": e.target.value } }); setGetFormData({ ...getFormData, ...{ "department_office": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "department_office": false } }) }}
                                             />
                                             <InputLabel shrink htmlFor="department_office"> Department/Office (if applicable) </InputLabel>
 
+
                                             <TextField
+                                                disabled={true}
                                                 error={getFormDataError?.institution_contact_phone}
-                                                value={evaluationData?.evaluation_info?.institution_contact_phone || evaluationData?.evaluation_info?.contact_person }
+                                                value={evaluationData?.evaluation_info?.institution_contact_phone || evaluationData?.evaluation_info?.contact_person}
                                                 margin="normal"
                                                 required
                                                 fullWidth
@@ -1255,14 +1281,16 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                 autoFocus
                                                 variant="outlined"
                                                 className='mt-4 mb-0'
-                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "institution_contact_phone": e.target.value } }); setGetFormData({ ...getFormData, ...{ "institution_contact_phone": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "institution_contact_phone": false } })}}
+                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "institution_contact_phone": e.target.value } }); setGetFormData({ ...getFormData, ...{ "institution_contact_phone": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "institution_contact_phone": false } }) }}
                                             />
                                             <InputLabel shrink htmlFor="institution_contact_phone"> Contact Phone (if applicable) </InputLabel>
 
 
+
                                             <TextField
+                                                disabled={true}
                                                 error={getFormDataError?.institution_contact_person_email}
-                                                value={evaluationData?.evaluation_info?.institution_contact_person_email || evaluationData?.evaluation_info?.contact_person_email }
+                                                value={evaluationData?.evaluation_info?.institution_contact_person_email || evaluationData?.evaluation_info?.contact_person_email}
                                                 margin="normal"
                                                 required
                                                 fullWidth
@@ -1272,22 +1300,12 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                 autoFocus
                                                 variant="outlined"
                                                 className='mt-4 mb-0'
-                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "institution_contact_person_email": e.target.value } }); setGetFormData({ ...getFormData, ...{ "institution_contact_person_email": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "institution_contact_person_email": false } })}}
+                                                onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "institution_contact_person_email": e.target.value } }); setGetFormData({ ...getFormData, ...{ "institution_contact_person_email": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "institution_contact_person_email": false } }) }}
                                             />
                                             <InputLabel shrink htmlFor="institution_contact_person_email"> Contact Email (if applicable) </InputLabel>
                                         </Box>
                                     </div>
                                 </CCol>
-
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
-                                    onClick={(e) => passConfiguration("add", "patch", "recipient_institution_detail", 419)}
-                                >
-                                    Save
-                                </Button>
                             </CAccordionBody>
                         </CAccordionItem>
                         <CAccordionItem itemKey={4}>
@@ -1296,12 +1314,13 @@ const EditSubmittedEvaluationInfo = (props) => {
 
                                 <div className='mui-control-form' >
                                     <Select
+                                        isDisabled={true}
                                         placeholder={evaluationData?.evaluation_info?.payment_method}
                                         defaultInputValue={evaluationData?.evaluation_info?.payment_method}
                                         options={optionsPaymentMethod}
                                         id="payment_method"
                                         className='other-input-select d-filters wp-cursor-pointer mb-0'
-                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "payment_method": e.value } }); setGetFormData({ ...getFormData, ...{ "payment_method": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "payment_method": false } })}}
+                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "payment_method": e.value } }); setGetFormData({ ...getFormData, ...{ "payment_method": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "payment_method": false } }) }}
                                     />
                                     <InputLabel shrink htmlFor="payment_method"> Payment Method </InputLabel>
                                 </div>
@@ -1312,7 +1331,9 @@ const EditSubmittedEvaluationInfo = (props) => {
                                         noValidate
                                         autoComplete="on"
                                     >
+
                                         <TextField
+                                            disabled={true}
                                             error={getFormDataError?.billing_address}
                                             value={evaluationData?.evaluation_info?.billing_address}
                                             id="billing_address"
@@ -1324,23 +1345,11 @@ const EditSubmittedEvaluationInfo = (props) => {
                                             type="billing_address"
                                             fullWidth
                                             required
-                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "billing_address": e.target.value } }); setGetFormData({ ...getFormData, ...{ "billing_address": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "billing_address": false } })}}
+                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "billing_address": e.target.value } }); setGetFormData({ ...getFormData, ...{ "billing_address": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "billing_address": false } }) }}
                                         />
                                         <InputLabel shrink htmlFor="billing_address"> Billing address </InputLabel>
                                     </Box>
                                 </div>
-
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
-                                    // style={{ color: "#fff" }}
-                                    // className="bg-text-com-wp"
-                                    onClick={(e) => passConfiguration("add", "patch", "payment_method", 419)}
-                                >
-                                    Save
-                                </Button>
                             </CAccordionBody>
                         </CAccordionItem>
                         <CAccordionItem itemKey={5}>
@@ -1352,7 +1361,9 @@ const EditSubmittedEvaluationInfo = (props) => {
                                         noValidate
                                         autoComplete="on"
                                     >
+
                                         <TextField
+                                            disabled={true}
                                             error={getFormDataError?.reference_email}
                                             value={evaluationData?.evaluation_info?.reference_email}
                                             id="reference_email"
@@ -1364,11 +1375,13 @@ const EditSubmittedEvaluationInfo = (props) => {
                                             className='mt-4 mb-0'
                                             fullWidth
                                             required
-                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "reference_email": e.target.value } }); setGetFormData({ ...getFormData, ...{ "reference_email": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "reference_email": false } })}}
+                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "reference_email": e.target.value } }); setGetFormData({ ...getFormData, ...{ "reference_email": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "reference_email": false } }) }}
                                         />
                                         <InputLabel shrink htmlFor="reference_email"> Reference Email </InputLabel>
 
+
                                         <TextField
+                                            disabled={true}
                                             error={getFormDataError?.reference_phone}
                                             value={evaluationData?.evaluation_info?.reference_phone}
                                             id="reference_phone"
@@ -1380,54 +1393,31 @@ const EditSubmittedEvaluationInfo = (props) => {
                                             fullWidth
                                             required
                                             className='mt-4 mb-0'
-                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "reference_phone": e.target.value } }); setGetFormData({ ...getFormData, ...{ "reference_phone": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "reference_phone": false } })}}
+                                            onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "reference_phone": e.target.value } }); setGetFormData({ ...getFormData, ...{ "reference_phone": e.target.value } }); setGetFormDataError({ ...getFormDataError, ...{ "reference_phone": false } }) }}
                                         />
                                         <InputLabel shrink htmlFor="reference_phone"> Reference Phone </InputLabel>
 
                                     </Box>
                                 </div>
-
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
-                                    // style={{ color: "#fff" }}
-                                    // className="bg-text-com-wp"
-                                    onClick={(e) => passConfiguration("add", "patch", "verification_reference", 419)}
-                                >
-                                    Save
-                                </Button>
                             </CAccordionBody>
                         </CAccordionItem>
-                        <CAccordionItem itemKey={5}>
+                        <CAccordionItem itemKey={6}>
                             <CAccordionHeader> Consent  </CAccordionHeader>
                             <CAccordionBody>
 
                                 <div className='mui-control-form' >
                                     <Label for="verification_status" className="label-dc"> </Label>
                                     <Select
+                                        isDisabled={true}
                                         placeholder={evaluationData?.evaluation_info?.verification_status}
                                         defaultInputValue={evaluationData?.evaluation_info?.verification_status}
                                         options={optionsVerificationState}
                                         id="verification_status"
                                         className='other-input-select d-filters wp-cursor-pointer mb-0 '
-                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info:{...evaluationData.evaluation_info, "verification_status": e.value } }); setGetFormData({ ...getFormData, ...{ "verification_status": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "verification_status": false } })}}
+                                        onChange={(e) => { setEvaluationData({ ...evaluationData, evaluation_info: { ...evaluationData.evaluation_info, "verification_status": e.value } }); setGetFormData({ ...getFormData, ...{ "verification_status": e.value } }); setGetFormDataError({ ...getFormDataError, ...{ "verification_status": false } }) }}
                                     />
                                     <InputLabel shrink htmlFor="verification_status"> Give consent </InputLabel>
                                 </div>
-
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
-                                    // style={{ color: "#fff" }}
-                                    // className="bg-text-com-wp"
-                                    onClick={(e) => passConfiguration("add", "patch", "verification_reference", 419)}
-                                >
-                                    Save
-                                </Button>
                             </CAccordionBody>
                         </CAccordionItem>
 

@@ -5,7 +5,7 @@ import 'datatables.net';
 import 'datatables.net-dt/css/jquery.dataTables.min.css';
 import axios from 'axios';
 import moment from 'moment';
-import {
+import { 
   CAvatar, CDropdown,
   // CDropdownDivider,
   CDropdownHeader, CDropdownItem, CDropdownMenu, CDropdownToggle, CBadge, CButton, CNavbar, CImage, CNavbarBrand, CCard, CDropdownDivider, CCardBody, CCollapse, CCardHeader, CCol, CLink, CModal, CModalBody, CModalFooter, CModalHeader, CModalTitle, CPopover, CRow, CNav, CNavItem, CTooltip
@@ -157,8 +157,8 @@ const PassInfoDatatables = (props) => {
       name: 'Action',
       cell: row => (
         <div className="clearfix">
-           <Badge color='primary' className='wp-cursor-pointer m-2'  onClick={() => funE(row)}> View </Badge>
-           <Badge color='secondary' className='wp-cursor-pointer m-2' onClick={() => funEvaluationEdit(row)} > Edit </Badge>
+           <Badge color='info' className='wp-cursor-pointer m-2'  onClick={() => funE(row)}> View </Badge>
+           <Badge color='danger' className='wp-cursor-pointer m-2' onClick={() => funEvaluationEdit(row)} > Process </Badge>
         </div>
       )
     }
@@ -180,13 +180,12 @@ const PassInfoDatatables = (props) => {
       return {
         "ID": id + 1,
         "IDT": tableData[id]?.id,
-        // "Program": tableData[id]?.source_metadata?.program,
         // "Current Level": tableData[id]?.source_metadata?.currentLevel,
       }
     })
     if (valSelected === "Export to excel") {
       // 
-      downloadExcel(transformData);
+      downloadExcel(tableData);
     }
     else if (valSelected === "Export to csv") {
       // 
@@ -224,7 +223,7 @@ const PassInfoDatatables = (props) => {
     // console.log("csv", csv);
     if (csv == null) { return };
 
-    const filename = 'WPexport.csv';
+    const filename = 'CLAexport.csv';
 
     if (!csv.match(/^data:text\/csv/i)) {
       csv = `data:text/csv;charset=utf-8,${csv}`;
@@ -239,10 +238,10 @@ const PassInfoDatatables = (props) => {
     // e.preventDefault();
     const ws = XLSX.utils.json_to_sheet(data);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "WPexport");
+    XLSX.utils.book_append_sheet(wb, ws, "CLAexport");
 
     /* generate XLSX file and send to client */
-    XLSX.writeFile(wb, "WPexport.xlsx");
+    XLSX.writeFile(wb, "CLAexport.xlsx");
   };
 
   // option export

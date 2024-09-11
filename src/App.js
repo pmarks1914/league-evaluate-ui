@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './scss/style.scss'
 import "./generic.css"
 import 'react-circular-progressbar/dist/styles.css';
+import 'react-quill/dist/quill.snow.css';
 
 // import 'https://code.jquery.com/jquery-3.5.1.js'
 // import 'https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js'

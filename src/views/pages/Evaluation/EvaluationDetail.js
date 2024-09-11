@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import {
+import { 
     CBadge,
     CCard,
     CCardBody,
@@ -52,7 +52,7 @@ const EvaluationDetail = () => {
             //   console.log("data getApplication data api ==", response);
 
             if (response.status === 200) {
-                console.log("data source sch ====", response?.data);
+                // console.log("data source sch ====", response?.data);
                 if (response?.data?.data) {
                     setEvaluationData(response?.data?.data)
                 }
@@ -112,6 +112,9 @@ const EvaluationDetail = () => {
             {/* <Counter /> */}
             <Box style={{ width: '70%', margin: '0px 0px' }} >
                 {/* <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}> */}
+                {
+                    evaluationData?.evaluation_info ?
+                
                 <CCard className='mt-5'>
                     <p className='d-flex justify-content-center mt-2 mb-2 '> <h4>Details: {applicantData?.applicant_full_name} </h4> </p>
                     <CListGroup flush>
@@ -144,7 +147,8 @@ const EvaluationDetail = () => {
                                     { (evaluationData?.evaluation_info?.identification)?.length > 0 ? [<a href={evaluationData?.evaluation_info?.identification } target='_blank' rel="noreferrer" key={1}> identification </a>, <br key={2}/>] : '' }
                                     { (evaluationData?.evaluation_info?.report)?.length > 0 ? [<a href={evaluationData?.evaluation_info?.report } target='_blank' rel="noreferrer" key={1}> Report </a>, <br key={2}/>] : '' } 
                                     { (evaluationData?.evaluation_info?.recommendation)?.length > 0 ? [<a href={evaluationData?.evaluation_info?.recommendation } target='_blank' rel="noreferrer" key={1}> recommendation </a>, <br key={2}/>] : '' } 
-                                    { (evaluationData?.evaluation_info?.photo)?.length > 0 ? [<a href={evaluationData?.evaluation_info?.photo } target='_blank' rel="noreferrer" key={1}> photo </a>, <br key={2}/>] : '' } 
+
+                                    {/* { (evaluationData?.evaluation_info?.photo)?.length > 0 ? [<a href={evaluationData?.evaluation_info?.photo } target='_blank' rel="noreferrer" key={1}> photo </a>, <br key={2}/>] : '' }  */}
 
                                 </Col>
                             </Row>
@@ -273,7 +277,7 @@ const EvaluationDetail = () => {
                                 <Col sm="4" xm="4" md="4" lg="4" xl="4"> </Col>
                                 <Col sm="4"></Col>
                                 <Col sm="4">
-                                    <a href={`/evaluation-edit/${evaluationData?.id}`} > Edit </a> <br />
+                                    <a href={`/evaluation-edit/${evaluationData?.id}`} > Evaluation Reporting </a> <br />
                                 </Col>
                             </Row>
                         </CListGroupItem>
@@ -283,6 +287,7 @@ const EvaluationDetail = () => {
 
                     </CListGroup>
                 </CCard>
+                : "" }
 
 
             </Box>
