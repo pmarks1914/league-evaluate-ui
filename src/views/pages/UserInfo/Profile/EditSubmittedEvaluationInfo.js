@@ -579,6 +579,16 @@ const EditSubmittedEvaluationInfo = (props) => {
                     <p className='mt-0 mb-0'>
                         {evaluationData?.description?.length > 15 ? `${(evaluationData?.description)?.slice(0, 15)}...` : evaluationData?.description}
                     </p>
+                    <Button
+                        type="submit"
+                        // fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                        onClick={() => handleCertificateUpload(6)}
+                        disabled={uploading}
+                    >
+                        {uploading ? 'Saving' : 'Complete'}
+                    </Button>
                 </CCol>
             </CRow>
 
