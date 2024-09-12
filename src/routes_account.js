@@ -125,7 +125,8 @@ const routes = [
   { path: '/evaluation/:id', name: 'Evaluation', element: Evaluation },
   { path: '/evaluation-detail', name: 'Evaluation', element: Evaluation },
   { path: '/evaluation-detail/:id', name: 'Detail View', element: EvaluationDetail },
-  { path: '/evaluation-edit/:id', name: 'Edit Evaluation Profile', element: EditSubmittedEvaluationProfile }
+  { path: '/evaluation-edit', name: 'Evaluation', element: Evaluation },
+  { path: '/evaluation-edit/:id', name: 'Edit Evaluation Profile', element: EditSubmittedEvaluationProfile },
 
   // { path: '/checkout/:id', name: '', element: Checkout }, 
 

@@ -6,7 +6,7 @@ import {
   CCardHeader,
   CCol,
   CRow,
-  CAccordion,
+  CAccordion, 
   CAccordionBody,
   CAccordionHeader,
   CAccordionItem,
@@ -65,28 +65,36 @@ const EditSubmittedEvaluationProfile = () => {
   return (
     <div className="App">
       <ToastContainer />
-      <h5>Edit Your Evaluation</h5>
+      <h5>Process Evaluation</h5>
       <Nav tabs className="v-flow">
         <NavItem>
           <NavLink
             className={classnames({ active: activeTab === '1' })}
             onClick={() => { toggle('1'); setManageProfileSwitch("education") }}
           >
-            <h6>Educational Information</h6>
+            <h6>Evaluation Report </h6>
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink
             className={classnames({ active: activeTab === '2' })}
-            onClick={() => { toggle('2'); setManageProfileSwitch("additional") }}
+            onClick={() => { toggle('2'); setManageProfileSwitch("education") }}
+          >
+            <h6> Educational Information </h6>
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink
+            className={classnames({ active: activeTab === '3' })}
+            onClick={() => { toggle('3'); setManageProfileSwitch("additional") }}
           >
             <h6> Additional Documents </h6>
           </NavLink>
         </NavItem>
         <NavItem>
           <NavLink
-            className={classnames({ active: activeTab === '3' })}
-            onClick={() => { toggle('3'); setManageProfileSwitch("other") }}
+            className={classnames({ active: activeTab === '4' })}
+            onClick={() => { toggle('4'); setManageProfileSwitch("other") }}
           >
             <h6> Other Information </h6>
           </NavLink>
@@ -97,7 +105,7 @@ const EditSubmittedEvaluationProfile = () => {
             <Row>
               <Col sm="0" xs="0" md="2" lg="2" xl="2" className='mt-3 mr-0'> </Col>
               <Col sm="12" xs="12" md="8" lg="8" xl="8" id="tab-type2" className='ml-0'>
-                <EditSubmittedEvaluationInfo profileManage={"education"} />
+                <EditSubmittedEvaluationInfo profileManage={"evaluator"} />
               </Col>
             </Row> 
           </TabPane>
@@ -105,11 +113,19 @@ const EditSubmittedEvaluationProfile = () => {
             <Row>
               <Col sm="0" xs="0" md="2" lg="2" xl="2" className='mt-3 mr-0'> </Col>
               <Col sm="12" xs="12" md="8" lg="8" xl="8" id="tab-type2" className='ml-0'>
+                <EditSubmittedEvaluationInfo profileManage={"education"} />
+              </Col>
+            </Row> 
+          </TabPane>
+          <TabPane tabId="3">
+            <Row>
+              <Col sm="0" xs="0" md="2" lg="2" xl="2" className='mt-3 mr-0'> </Col>
+              <Col sm="12" xs="12" md="8" lg="8" xl="8" id="tab-type2" className='ml-0'>
                 <EditSubmittedEvaluationInfo profileManage={"additional"} />
               </Col>
             </Row>
           </TabPane>
-          <TabPane tabId="3">
+          <TabPane tabId="4">
             <Row>
               <Col sm="0" xs="0" md="2" lg="2" xl="2" className='mt-3 mr-0'> </Col>
               <Col sm="12" xs="12" md="8" lg="8" xl="8" id="tab-type2" className='ml-0'>

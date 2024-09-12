@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import {
   CAvatar,
+  CBadge,
   CButton,
   CButtonGroup,
   CCard,
@@ -400,7 +401,6 @@ function evaluationApply(description) {
 
       <ToastContainer />
 
-
       <CRow className='m-3'>
         <CCol xs={12} sm={6} lg={3}>
           <CWidgetStatsB
@@ -408,7 +408,7 @@ function evaluationApply(description) {
             progress={{ color: 'info', value: 100 }}
             text="Evaluation request"
             title="Evaluation Count"
-            value={evaDetails?.count_stats?.evaluation || "0"}
+            value={evaDetails?.count_stats?.evaluation_count_total || "0"}
           />
         </CCol>
         <CCol xs={12} sm={6} lg={3}>
@@ -417,7 +417,7 @@ function evaluationApply(description) {
             progress={{ color: 'danger', value: 100 }}
             text="Rejected Evaluation Request"
             title="Rejected Count"
-            value={evaDetails?.count_stats?.evaluation || "0"}
+            value={evaDetails?.count_stats?.evaluation_count_rejected || "0"}
           />
         </CCol>
         <CCol xs={12} sm={6} lg={3}>
@@ -426,7 +426,7 @@ function evaluationApply(description) {
             progress={{ color: 'warning', value: 100 }}
             text="Evaluation Request Started"
             title="In progress Count"
-            value={evaDetails?.count_stats?.file || "0"}
+            value={evaDetails?.count_stats?.evaluation_count_started || "0"}
           />
         </CCol>
         <CCol xs={12} sm={6} lg={3}>
@@ -435,7 +435,7 @@ function evaluationApply(description) {
             progress={{ color: 'success', value: 100 }}
             text="Completed Evaluation Request"
             title="Completed Count"
-            value={evaDetails?.count_stats?.file || "0"}
+            value={evaDetails?.count_stats?.evaluation_count_completed || "0"}
           />
         </CCol>
 
@@ -446,7 +446,7 @@ function evaluationApply(description) {
         userData?.type === 'Student' ?
           <CRow className='m-3' style={{ width: "100%" }}>
 
-            <CCol xs={12} sm={9} lg={9} >
+            <CCol xs={12} sm={12} lg={12} >
 
               <CCard className="mb-4">
                 <CCardHeader> Evaluation Overview </CCardHeader>
@@ -459,6 +459,8 @@ function evaluationApply(description) {
                         </CTableHeaderCell>
                         <CTableHeaderCell>Description</CTableHeaderCell>
                         <CTableHeaderCell> </CTableHeaderCell>
+                        <CTableHeaderCell> </CTableHeaderCell>
+                        <CTableHeaderCell> </CTableHeaderCell>
                         <CTableHeaderCell>Status</CTableHeaderCell>
                       </CTableRow>
                     </CTableHead>
@@ -466,17 +468,23 @@ function evaluationApply(description) {
                       {evaDetails?.data?.map((item, index) => (
                         <CTableRow v-for="item in tableItems" key={index}>
                           <CTableDataCell className="text-center">
-                            <CAvatar size="md" src={process.env.REACT_APP_BASE_API + userData?.photo} status={"success"} />
+                            <CAvatar size="md" src={item?.evaluation_info?.photo} status={"success"} />
                           </CTableDataCell>
                           <CTableDataCell>
                             <div>{item?.name}</div>
+                            <a href={`evaluation-edit/${item?.id}`} > Evaluate </a>
+                          </CTableDataCell>
+                          <CTableDataCell>
+                            <div> {item?.description?.slice(0, 35)} </div>
+                          </CTableDataCell>
+                          <CTableDataCell>
                             <div className="small text-medium-emphasis">
                               <span>{'New '}</span> | Applied:{' '}
                               {moment(item?.created_on).format("YYYY-MM-DD")}
                             </div>
                           </CTableDataCell>
                           <CTableDataCell>
-                            <div> {item?.description?.slice(0, 35)} </div>
+                            <CBadge color={item?.status === "COMPLETED" ? "success" : ( item?.status === "FAILED" ? "error" : (item?.status === "PENDING" ? "info" : (item?.status === null ? "info" : "warning" ) ) ) }  > {item?.status || "PENDING" }  </CBadge>
                           </CTableDataCell>
                           <CTableDataCell>
                             <div className="clearfix">
