@@ -484,7 +484,7 @@ function evaluationApply(description) {
                             </div>
                           </CTableDataCell>
                           <CTableDataCell>
-                            <CBadge color={item?.status === "COMPLETED" ? "success" : ( item?.status === "FAILED" ? "error" : (item?.status === "PENDING" ? "info" : (item?.status === null ? "info" : "warning" ) ) ) }  > {item?.status || "PENDING" }  </CBadge>
+                            <CBadge color={item?.status === "COMPLETED" ? "success" : ( item?.status === "REJECTED" ? "danger" : (item?.status === "PENDING" ? "info" : (item?.status === null ? "info" : "warning" ) ) ) }  > {item?.status || "PENDING" }  </CBadge>
                           </CTableDataCell>
                           <CTableDataCell>
                             <div className="clearfix">
