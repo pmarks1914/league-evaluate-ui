@@ -513,10 +513,14 @@ const EditSubmittedEvaluationInfo = (props) => {
             icon: 'info',
             allowOutsideClick: false,
             // allowEscapeKey: false,
-            showCancelButton: true,
-            confirmButtonColor: '#FF7643',
+            // showCancelButton: true,
+            showDenyButton: true,
+            showCloseButton: true,
+            confirmButtonColor: '#000',
             // cancelButtonColor: '#d33',
-            confirmButtonText: 'Confirm'
+            confirmButtonText: 'Complete',
+            // cancelButtonText: 'Cancel',
+            denyButtonText: 'Reject'
           }).then((result) => {
             if (result.isConfirmed) {
               // 
