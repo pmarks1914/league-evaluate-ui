@@ -13,7 +13,7 @@ import {
     CButton,
     CCardGroup,
     CContainer
-} from '@coreui/react'; 
+} from '@coreui/react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
@@ -484,7 +484,7 @@ const EditSubmittedEvaluationInfo = (props) => {
         }
         else if (section === "evaluator_content") {
             // console.log("evaluationData", getFormData) 
-            if( editorContent !== "" ){
+            if (editorContent !== "") {
                 //   
                 data = { "content": editorContent }
                 if (method === "patch") {
@@ -503,11 +503,8 @@ const EditSubmittedEvaluationInfo = (props) => {
 
         genericApiCall(config, section)
     }
-    function completeReject(){
+    function completeReject() {
         // 
-
-        let data = { "status": editorContent }
-
         Swal.fire({
             title: 'Do you want to proceed?',
             icon: 'info',
@@ -521,20 +518,37 @@ const EditSubmittedEvaluationInfo = (props) => {
             confirmButtonText: 'Complete',
             // cancelButtonText: 'Cancel',
             denyButtonText: 'Reject'
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-              // 
-              let config = {
-                  method: "PATCH",
-                  url: process.env.REACT_APP_BASE_API + "/status/evaluation/" + evaluation_id,
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + userData?.token
-                  },
-                  data: data
-              };
-              genericApiCall(config, "")            }
-          });
+                // 
+                setUploading(true)
+                let config = {
+                    method: "PATCH",
+                    url: process.env.REACT_APP_BASE_API + "/status/evaluation/" + evaluation_id,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + userData?.token
+                    },
+                    data: { "status": "COMPLETED" }
+                };
+                genericApiCall(config, "")
+            }
+            else if (result.isDenied) {
+                // 
+                setUploading(true)
+                let config = {
+                    method: "PATCH",
+                    url: process.env.REACT_APP_BASE_API + "/status/evaluation/" + evaluation_id,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + userData?.token
+                    },
+                    data: { "status": "REJECTED" }
+                };
+                genericApiCall(config, "")
+            }
+        }
+        );
     }
 
     function getDataInfo() {
@@ -612,16 +626,32 @@ const EditSubmittedEvaluationInfo = (props) => {
                     <p className='mt-0 mb-0'>
                         {evaluationData?.description?.length > 15 ? `${(evaluationData?.description)?.slice(0, 15)}...` : evaluationData?.description}
                     </p>
-                    <Button
-                        type="submit"
-                        // fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                        onClick={() => completeReject()}
-                        disabled={uploading}
-                    >
-                        {uploading ? 'Saving' : 'Complete'}
-                    </Button>
+                    {
+                        evaluationData?.progress === 75 ?
+                            <Button
+                                type="submit"
+                                // fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                                onClick={() => completeReject()}
+                                disabled={uploading}
+                            >
+                                {uploading ? 'Saving' : 'Complete'}
+                            </Button>
+                            : ""}
+                    {
+                        evaluationData?.progress === 100 ?
+                            <Button
+                                type="submit"
+                                // fullWidth
+                                variant="contained"
+                                sx={{ mt: 3, mb: 2 }}
+                                disabled={true}
+                            >
+                                {'Completed'}
+                            </Button>
+                            : ""
+                    }
                 </CCol>
             </CRow>
 
@@ -634,7 +664,7 @@ const EditSubmittedEvaluationInfo = (props) => {
                             <CAccordionBody>
                                 <div className='m-2'>
                                     <ReactQuill
-                                        value={editorContent || evaluationData?.content }
+                                        value={editorContent || evaluationData?.content}
                                         onChange={handleEditorChange}
                                         placeholder="Write comment..."
                                         style={{ "height": "300px" }}
@@ -645,19 +675,36 @@ const EditSubmittedEvaluationInfo = (props) => {
 
                                 </div>
                                 {
-                                    editorContent === "" ? "" :                                
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
-                                    // style={{ color: "#fff" }}
-                                    // className="bg-text-com-wp"
-                                    onClick={(e) => passConfiguration("add", "patch", "evaluator_content", 419)}
-                                >
-                                    Save
-                                </Button>
+                                    editorContent === "" ? "" :
+                                        (
+                                            evaluationData?.progress === 100 ?
+                                                <Button
+                                                    type="submit"
+                                                    // fullWidth
+                                                    variant="contained"
+                                                    sx={{ mt: 3, mb: 2 }}
+                                                    disabled={true}
+                                                >
+                                                    {'Completed'}
+                                                </Button>
+                                                :
+                                                <Button
+                                                    type="submit"
+                                                    fullWidth
+                                                    variant="contained"
+                                                    sx={{ mt: 3, mb: 2 }}
+                                                    // style={{ color: "#fff" }}
+                                                    // className="bg-text-com-wp"
+                                                    onClick={(e) => passConfiguration("add", "patch", "evaluator_content", 419)}
+                                                >
+                                                    Save
+                                                </Button>
+
+                                        )
                                 }
+
+
+
                             </CAccordionBody>
                         </CAccordionItem>
                         <CAccordionItem itemKey={2}>
@@ -701,26 +748,43 @@ const EditSubmittedEvaluationInfo = (props) => {
 
                                 <strong>Upload report document </strong>
                                 <p className='mt-2 mb-1'>Your file size must be less than 1.22 MB</p>
-                                <Upload {...props2} onChange={(e) => { setProfileCertificate(e?.target?.value || null) }} value={profileCertificate} maxCount={1} >
-                                    <ButtonGroup variant='outline' spacing='6'>
-                                        <Button className='bg-secondary text-white' ><CIcon icon={cilCloudDownload} className="me-2" /> Select a document </Button>
-                                    </ButtonGroup>
-                                </Upload>
-
-
-
-                                {evaluationData?.evaluation_info?.evaluatorReport < 0 ? "" :
-                                    <Button
-                                        type="submit"
-                                        fullWidth
-                                        variant="contained"
-                                        sx={{ mt: 3, mb: 2 }}
-                                        onClick={() => handleCertificateUpload(6)}
-                                        disabled={uploading}
-                                    >
-                                        {uploading ? 'Uploading' : 'Submit'}
-                                    </Button>
+                                {
+                                    evaluationData?.progress === 100 ? ""
+                                        :
+                                        <Upload {...props2} onChange={(e) => { setProfileCertificate(e?.target?.value || null) }} value={profileCertificate} maxCount={1} >
+                                            <ButtonGroup variant='outline' spacing='6'>
+                                                <Button className='bg-secondary text-white' ><CIcon icon={cilCloudDownload} className="me-2" /> Select a document </Button>
+                                            </ButtonGroup>
+                                        </Upload>
                                 }
+                                {
+
+                                    evaluationData?.progress === 100 ?
+                                        <Button
+                                            type="submit"
+                                            // fullWidth
+                                            variant="contained"
+                                            sx={{ mt: 3, mb: 2 }}
+                                            disabled={true}
+                                        >
+                                            {'Completed'}
+                                        </Button>
+                                        : (
+                                            evaluationData?.evaluation_info?.evaluatorReport < 0 ? "" :
+                                                <Button
+                                                    type="submit"
+                                                    fullWidth
+                                                    variant="contained"
+                                                    sx={{ mt: 3, mb: 2 }}
+                                                    onClick={() => handleCertificateUpload(6)}
+                                                    disabled={uploading}
+                                                >
+                                                    {uploading ? 'Uploading' : 'Submit'}
+                                                </Button>
+                                        )
+                                }
+
+
                                 <p className='mt-3 mb-1'>
                                     <strong > Evaluator Report document </strong>
                                     {
