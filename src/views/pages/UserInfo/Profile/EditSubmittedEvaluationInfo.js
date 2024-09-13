@@ -503,6 +503,35 @@ const EditSubmittedEvaluationInfo = (props) => {
 
         genericApiCall(config, section)
     }
+    function completeReject(){
+        // 
+
+        let data = { "status": editorContent }
+
+        Swal.fire({
+            title: 'Do you want to proceed?',
+            icon: 'info',
+            allowOutsideClick: false,
+            // allowEscapeKey: false,
+            showCancelButton: true,
+            confirmButtonColor: '#FF7643',
+            // cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              // 
+              let config = {
+                  method: "PATCH",
+                  url: process.env.REACT_APP_BASE_API + "/status/evaluation/" + evaluation_id,
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': 'Bearer ' + userData?.token
+                  },
+                  data: data
+              };
+              genericApiCall(config, "")            }
+          });
+    }
 
     function getDataInfo() {
         let config = {
@@ -584,7 +613,7 @@ const EditSubmittedEvaluationInfo = (props) => {
                         // fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
-                        onClick={() => handleCertificateUpload(6)}
+                        onClick={() => completeReject()}
                         disabled={uploading}
                     >
                         {uploading ? 'Saving' : 'Complete'}
