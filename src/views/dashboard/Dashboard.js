@@ -385,8 +385,6 @@ function evaluationApply(description) {
     window.location.href = '/application-detail/' + userData?.organization_id + "/"
     // }, 1000)
 
-    // console.log("<<<<   >>>>", '/payroll/salary/'+rowIndexData?.payrollID?.toString()  )
-
   }
 
   return (
