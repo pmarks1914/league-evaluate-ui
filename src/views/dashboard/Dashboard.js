@@ -91,7 +91,6 @@ const Dashboard = () => {
     trackActivity();
 
   }, [applicationAction])
-  // console.log("summarry products", evaDetails)
 
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
@@ -235,7 +234,6 @@ const Dashboard = () => {
   }
   function declineApply(programId) {
 
-    // console.log(programId)
     let config = {
       method: "DELETE",
       url: process.env.REACT_APP_BASE_API + "/application/" + programId,
