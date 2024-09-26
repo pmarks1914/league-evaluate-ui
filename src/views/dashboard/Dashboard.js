@@ -379,7 +379,6 @@ function evaluationApply(description) {
   }
 
   function funE(rowIndexData) {
-    // console.log("rowIndexData ", rowIndexData)
     localStorage.setItem("applicantData", JSON.stringify(rowIndexData));
 
     // setTimeout(()=>{
