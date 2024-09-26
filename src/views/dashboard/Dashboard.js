@@ -91,7 +91,6 @@ const Dashboard = () => {
     trackActivity();
 
   }, [applicationAction])
-  // console.log("summarry products", evaDetails)
 
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
 
@@ -235,7 +234,6 @@ const Dashboard = () => {
   }
   function declineApply(programId) {
 
-    // console.log(programId)
     let config = {
       method: "DELETE",
       url: process.env.REACT_APP_BASE_API + "/application/" + programId,
@@ -338,7 +336,6 @@ function evaluationApply(description) {
         }
     };
     axios(config).then(response => {
-        // console.log(response?.data);
       setApplicationAction(applicationAction + 1)
         toast.success(response?.data?.message, {
             position: toast?.POSITION?.TOP_CENTER
@@ -382,14 +379,11 @@ function evaluationApply(description) {
   }
 
   function funE(rowIndexData) {
-    // console.log("rowIndexData ", rowIndexData)
     localStorage.setItem("applicantData", JSON.stringify(rowIndexData));
 
     // setTimeout(()=>{
     window.location.href = '/application-detail/' + userData?.organization_id + "/"
     // }, 1000)
-
-    // console.log("<<<<   >>>>", '/payroll/salary/'+rowIndexData?.payrollID?.toString()  )
 
   }
 
