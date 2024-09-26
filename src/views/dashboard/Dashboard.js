@@ -336,7 +336,6 @@ function evaluationApply(description) {
         }
     };
     axios(config).then(response => {
-        // console.log(response?.data);
       setApplicationAction(applicationAction + 1)
         toast.success(response?.data?.message, {
             position: toast?.POSITION?.TOP_CENTER
