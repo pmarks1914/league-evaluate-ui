@@ -381,9 +381,7 @@ function evaluationApply(description) {
   function funE(rowIndexData) {
     localStorage.setItem("applicantData", JSON.stringify(rowIndexData));
 
-    // setTimeout(()=>{
     window.location.href = '/application-detail/' + userData?.organization_id + "/"
-    // }, 1000)
 
   }
 
