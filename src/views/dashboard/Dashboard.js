@@ -389,9 +389,6 @@ function evaluationApply(description) {
 
   return (
     <>
-      {/* Sch  */}
-      {/* <WidgetsDropdown /> */}
-      {/* <WidgetsBrand withCharts /> */}
 
       <ToastContainer />
 
