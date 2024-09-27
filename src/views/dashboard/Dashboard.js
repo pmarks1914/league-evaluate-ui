@@ -374,7 +374,6 @@ function evaluationApply(description) {
   }
 
   window.onclick = function (event) {
-    // event.preventDefault()
     trackActivity()
   }
 
