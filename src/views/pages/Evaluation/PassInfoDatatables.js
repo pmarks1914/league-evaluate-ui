@@ -92,7 +92,6 @@ const PassInfoDatatables = (props) => {
           'Authorization': `Bearer ${currentUser.token}`
         },
       });
-      // console.log("response ?????", response)
 
       if (response?.status === 200) {
         // console.log("response ", response?.data)
@@ -101,7 +100,6 @@ const PassInfoDatatables = (props) => {
         setTableData(data);
         setTotalRecords(pagination?.total);
         setPagination({ next: pagination?.next, previous: pagination?.previous });
-        // console.log("--------", { data, next, previous, count })
       }
     } catch (error) {
       console.error("Error fetching data from server:", error);
