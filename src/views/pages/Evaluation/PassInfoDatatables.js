@@ -102,7 +102,7 @@ const PassInfoDatatables = (props) => {
         setPagination({ next: pagination?.next, previous: pagination?.previous });
       }
     } catch (error) {
-      console.error("Error fetching data from server:", error);
+      // console.error("Error fetching data from server:", error);
     }
     setLoading(false);
   };
