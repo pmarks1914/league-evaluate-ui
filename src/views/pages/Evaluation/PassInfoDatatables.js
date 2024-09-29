@@ -195,7 +195,6 @@ const PassInfoDatatables = (props) => {
     let result;
     const columnDelimiter = ',';
     const lineDelimiter = '\n';
-    // // console.log("array 0>>", array);
     const keys = Object.keys(array[0]);
     // // console.log("keys", keys );
     result = '';
