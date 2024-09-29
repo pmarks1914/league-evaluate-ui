@@ -92,7 +92,6 @@ const PassInfoDatatables = (props) => {
           'Authorization': `Bearer ${currentUser.token}`
         },
       });
-      // console.log("response ?????", response)
 
       if (response?.status === 200) {
         // console.log("response ", response?.data)
@@ -101,10 +100,9 @@ const PassInfoDatatables = (props) => {
         setTableData(data);
         setTotalRecords(pagination?.total);
         setPagination({ next: pagination?.next, previous: pagination?.previous });
-        // console.log("--------", { data, next, previous, count })
       }
     } catch (error) {
-      console.error("Error fetching data from server:", error);
+      // console.error("Error fetching data from server:", error);
     }
     setLoading(false);
   };
@@ -197,7 +195,6 @@ const PassInfoDatatables = (props) => {
     let result;
     const columnDelimiter = ',';
     const lineDelimiter = '\n';
-    // // console.log("array 0>>", array);
     const keys = Object.keys(array[0]);
     // // console.log("keys", keys );
     result = '';
