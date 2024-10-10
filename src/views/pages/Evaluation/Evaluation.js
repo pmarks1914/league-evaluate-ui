@@ -11,7 +11,6 @@ const userData = JSON.parse(localStorage.getItem("userDataStore"));
 const Evaluation = () => {
 
     const [pushData, setPushData] = useState(false)
-    //   console.log("userData ", userData)
 
     function requestEvaluation() {
 
