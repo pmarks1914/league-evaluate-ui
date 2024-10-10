@@ -740,7 +740,6 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                 />
                                                 <InputLabel shrink htmlFor="evaluatorReportDate"> Date issued </InputLabel>
                                             </Col>
-                                            {/* <Col sm="2" xs="2" md="2" lg="2" xl="2" className='float-left ml-2'> {evaluationData?.evaluation_info?.evaluatorReportDate} </Col> */}
                                         </Row>
                                     </Box>
 
