@@ -171,8 +171,6 @@ const EditSubmittedEvaluationInfo = (props) => {
     // certificate Transcript others
     const handleCertificateUpload = (fileType) => {
         setUploading(true)
-        // console.log(userData,getFormData, moment(getFormData?.certificateIssuedDate).format('YYYY-MM-DD'))
-        // console.log("<>", getFormData)
         const formData2 = new FormData();
         formData2.append('type', fileType);
         for (const key in getFormData) {
