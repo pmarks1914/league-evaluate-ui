@@ -232,7 +232,6 @@ const PassInfoDatatables = (props) => {
   }
   const downloadExcel = (data) => {
     // console.log( data );
-    // e.preventDefault();
     const ws = XLSX.utils.json_to_sheet(data);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "CLAexport");
@@ -289,10 +288,8 @@ const PassInfoDatatables = (props) => {
   }
   return (
     <div onClick={() => trackActivity()}>
-      {/* <h5 className='mb-3 ms-2'> Settlement Management </h5> */}
 
       <CRow>
-        {/* {console.log(" dateRange ", dateRange)} */}
         {/* search */}
         <CCol xs="12" sm="12" md={3} lg={3} className='m-3' >
           {/*  */}
@@ -371,11 +368,6 @@ const PassInfoDatatables = (props) => {
           <CModalTitle>  Transaction Details  </CModalTitle>
         </CModalHeader>
         <CModalBody className='contentForTransactionPrint'>
-          <p className="success rounded" style={{ textAlign: "center" }} >
-
-            {/* <CIcon icon={cilCheckCircle} className="bg-text-wp icon-wp" width="15%" /> */}
-          </p>
-
           {/* view only data for payout */}
         </CModalBody>
         <CModalFooter>
