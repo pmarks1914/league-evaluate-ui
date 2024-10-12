@@ -369,11 +369,6 @@ const PassInfoDatatables = (props) => {
           <CModalTitle>  Transaction Details  </CModalTitle>
         </CModalHeader>
         <CModalBody className='contentForTransactionPrint'>
-          <p className="success rounded" style={{ textAlign: "center" }} >
-
-            {/* <CIcon icon={cilCheckCircle} className="bg-text-wp icon-wp" width="15%" /> */}
-          </p>
-
           {/* view only data for payout */}
         </CModalBody>
         <CModalFooter>
