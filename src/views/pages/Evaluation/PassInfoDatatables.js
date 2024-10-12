@@ -288,7 +288,6 @@ const PassInfoDatatables = (props) => {
   }
   return (
     <div onClick={() => trackActivity()}>
-      {/* <h5 className='mb-3 ms-2'> Settlement Management </h5> */}
 
       <CRow>
         {/* search */}
