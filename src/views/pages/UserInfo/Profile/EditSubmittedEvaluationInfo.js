@@ -175,7 +175,6 @@ const EditSubmittedEvaluationInfo = (props) => {
         formData2.append('type', fileType);
         for (const key in getFormData) {
             if (getFormData.hasOwnProperty(key)) {
-                // console.log("<>", key, getFormData[key])
                 formData2.append(key, getFormData[key]);
             }
         }
