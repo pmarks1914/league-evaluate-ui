@@ -920,7 +920,6 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                     />
                                                     <InputLabel shrink htmlFor="transcriptDate"> Date issued </InputLabel>
                                                 </Col>
-                                                {/* <Col sm="2" xs="2" md="2" lg="2" xl="2" className='float-left ml-2'> {evaluationData?.evaluation_info?.transcriptDate} </Col> */}
                                             </Row>
                                         </Box>
 
@@ -1171,7 +1170,6 @@ const EditSubmittedEvaluationInfo = (props) => {
                                                     />
                                                     <InputLabel shrink htmlFor="reportDate"> Date issued </InputLabel>
                                                 </Col>
-                                                {/* <Col sm="2" xs="2" md="2" lg="2" xl="2" className='float-left ml-2'> {evaluationData?.evaluation_info?.reportDate} </Col> */}
                                             </Row>
                                         </Box>
 
