@@ -163,8 +163,6 @@ const EvaluationInfo = (props) => {
         const formData2 = new FormData();
         formData2.append('type', fileType);
 
-        // formData2.append('slug', getFormData?.certificate_name);
-
         if (fileType === 1) {
             formData2.append('slug', getFormData?.certificate_name);        
             formData2.append('issued_date', moment(getFormData?.certificateDate).format('YYYY-MM-DD'));
@@ -208,8 +206,6 @@ const EvaluationInfo = (props) => {
             // console.log(cert.type)
             if (cert.type === 'image/png' || cert.type === 'image/jpg' || cert.type === 'image/jpeg' || cert.type === 'application/pdf') {
                 axios(config).then(function (response) {
-
-                    // console.log(response.status)
                     if (response.data.code === 200) {
                         toast.success(response?.data.message || "Successful", {
                             position: toast?.POSITION?.TOP_CENTER

@@ -59,7 +59,6 @@ const Evaluation = () => {
             }
         };
         axios(config).then(response => {
-            // console.log(response?.data);
             toast.success(response?.data?.message, {
                 position: toast?.POSITION?.TOP_CENTER
             });
