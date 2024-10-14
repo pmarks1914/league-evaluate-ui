@@ -163,8 +163,6 @@ const EvaluationInfo = (props) => {
         const formData2 = new FormData();
         formData2.append('type', fileType);
 
-        // formData2.append('slug', getFormData?.certificate_name);
-
         if (fileType === 1) {
             formData2.append('slug', getFormData?.certificate_name);        
             formData2.append('issued_date', moment(getFormData?.certificateDate).format('YYYY-MM-DD'));
