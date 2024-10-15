@@ -228,7 +228,6 @@ const EvaluationInfo = (props) => {
                         });
                         setUploading(false)
 
-                        // console.log(error);
                     });
             }
             else {
