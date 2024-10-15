@@ -284,8 +284,6 @@ const EvaluationInfo = (props) => {
     }
     // execute pass configuration
     function passConfiguration(action, method, section, id) {
-
-        // console.log(method, section, id)
         let config = {};
         let data = {};
         if (section === "personal") {
