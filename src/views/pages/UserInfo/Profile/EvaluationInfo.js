@@ -203,7 +203,6 @@ const EvaluationInfo = (props) => {
                 },
                 data: formData2
             };
-            // console.log(cert.type)
             if (cert.type === 'image/png' || cert.type === 'image/jpg' || cert.type === 'image/jpeg' || cert.type === 'application/pdf') {
                 axios(config).then(function (response) {
                     if (response.data.code === 200) {
