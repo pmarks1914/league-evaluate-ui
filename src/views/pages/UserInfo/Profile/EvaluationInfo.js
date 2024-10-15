@@ -203,7 +203,6 @@ const EvaluationInfo = (props) => {
                 },
                 data: formData2
             };
-            // console.log(cert.type)
             if (cert.type === 'image/png' || cert.type === 'image/jpg' || cert.type === 'image/jpeg' || cert.type === 'application/pdf') {
                 axios(config).then(function (response) {
                     if (response.data.code === 200) {
@@ -229,7 +228,6 @@ const EvaluationInfo = (props) => {
                         });
                         setUploading(false)
 
-                        // console.log(error);
                     });
             }
             else {
@@ -246,7 +244,6 @@ const EvaluationInfo = (props) => {
     function genericApiCall(config, section) {
         // 
         axios(config).then(response => {
-            // console.log(response.data);
 
             toast.success(response?.data?.message, {
                 position: toast?.POSITION?.TOP_CENTER
@@ -287,8 +284,6 @@ const EvaluationInfo = (props) => {
     }
     // execute pass configuration
     function passConfiguration(action, method, section, id) {
-
-        // console.log(method, section, id)
         let config = {};
         let data = {};
         if (section === "personal") {
