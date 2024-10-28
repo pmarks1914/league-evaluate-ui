@@ -26,7 +26,7 @@ import axios from "axios"
 const userData = JSON.parse(localStorage.getItem('userDataStore'));
 
 const College = (props) => {
-    const [collegeInformation, setCollegeInformation] = useState([])
+    const [ventureInnovoInformation, setCollegeInformation] = useState([])
     const [schoolInformation, setSchoolInformation] = useState(null)    
     const [getFormData, setGetFormData] = useState(null)
     const [noData, setNoData] = useState("")
@@ -160,8 +160,8 @@ const College = (props) => {
             <CAccordion activeItemKey={1} className="mt-0">
 
             {
-                collegeInformation?.length > 0 ?
-                    collegeInformation?.map((post, id) => 
+                ventureInnovoInformation?.length > 0 ?
+                    ventureInnovoInformation?.map((post, id) => 
                         (
                             <CAccordionItem key={id+1} itemKey={post.id} >
                                 <CAccordionHeader onClick={()=>getProgramInfo(post?.id, post) }> {post?.name} </CAccordionHeader>
