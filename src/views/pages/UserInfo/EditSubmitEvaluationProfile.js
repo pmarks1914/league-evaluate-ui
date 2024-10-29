@@ -30,7 +30,6 @@ const EditSubmittedEvaluationProfile = () => {
 
   const [getCount, setGetCount] = useState(1)
 
-  // manage profile switches for items - tab 2
   // basic info, education info, family info
   const [manageProfileSwitch, setManageProfileSwitch] = useState("basic")
 
@@ -41,12 +40,7 @@ const EditSubmittedEvaluationProfile = () => {
   const toggle = tab => {
     if (activeTab !== tab) setActiveTab(tab);
     setGetCount(2);
-    if (tab === '1' || tab === '14' || "212") {
-      // document.getElementById("fin-month-id").style.display = "block";
-    }
-    else {
-      // document.getElementById("fin-month-id").style.display = "none";
-    }
+    
   }
   function trackActivity() {
     // e.preventDefault(); 
