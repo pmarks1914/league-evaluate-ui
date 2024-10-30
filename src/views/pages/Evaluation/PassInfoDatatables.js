@@ -374,10 +374,6 @@ const PassInfoDatatables = (props) => {
           <CButton color="secondary" className='text-white wp-cursor-pointer' onClick={() => setModal2(false)}>
             Close
           </CButton>
-          {/* <CButton className='text-white bg-text-wp' onClick={() => printContent()}>
-            Print
-          </CButton> */}
-
         </CModalFooter>
       </CModal>
 
