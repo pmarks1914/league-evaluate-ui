@@ -394,9 +394,6 @@ const PassInfoDatatables = (props) => {
           <CButton color="secondary" className='text-white wp-cursor-pointer' onClick={() => setModal3(false)}>
             Close
           </CButton>
-          {/* <CButton color="" className='text-white bg-text-wp' onClick={(e) => postPassProduct(e, "Delete", "Delete")}>
-            Confirm
-          </CButton> */}
 
         </CModalFooter>
       </CModal>
