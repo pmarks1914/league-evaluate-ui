@@ -16,12 +16,6 @@ let salaryGetAll = getApplication();
 
 const ApplicationDataTables = () => {
 
-  // const items = [];
-  // for (let i = 0; i < 30; i++) {
-  //   items.push( {id: i+1, name: `Kofi ${i}`, age: 21+i+1, address: `23 WY ${i}`, city: "Accra", salary: ""});
-  // }
-  // const products = salaryGetAllInfo;
-
   const [products, setProducts] = useState([]);
   const [salaryGetAllInfo, setSalaryGetAllInfo] = useState()
 
