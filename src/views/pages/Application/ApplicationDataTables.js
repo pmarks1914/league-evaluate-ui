@@ -11,7 +11,6 @@ const userData = JSON.parse(localStorage.getItem("userDataStore"));
 
 let salaryGetAll = getApplication();
 // let salaryGetAllInfo = []
-// salaryGetAll.list.then(value => salaryGetAllInfo = value)
 
 
 const ApplicationDataTables = () => {
