@@ -10,7 +10,6 @@ import { Badge } from 'reactstrap';
 const userData = JSON.parse(localStorage.getItem("userDataStore"));
 
 let salaryGetAll = getApplication();
-// let salaryGetAllInfo = []
 
 
 const ApplicationDataTables = () => {
