@@ -90,7 +90,6 @@ const ApplicationDataTables = () => {
   };
 
   function funE(e, column, columnIndex, rowIndexData) {
-    // console.log("rowIndexData ", rowIndexData)
     localStorage.setItem("applicantData", JSON.stringify(rowIndexData));
 
     // setTimeout(()=>{
