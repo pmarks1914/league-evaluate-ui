@@ -30,7 +30,6 @@ const ApplicationDataTables = () => {
     {
       dataField: 'applicant_full_name',
       text: 'Name',
-      // filter: textFilter()
     },
     {
       dataField: 'applicant_program_name',
@@ -46,7 +45,6 @@ const ApplicationDataTables = () => {
     {
       dataField: 'progress',
       text: 'Progress',
-      // filter: textFilter(),
       sort: true
     },
     {
