@@ -45,7 +45,6 @@ const ApplicationDataTables = () => {
     {
       dataField: 'progress',
       text: 'Progress',
-      // filter: textFilter(),
       sort: true
     },
     {
